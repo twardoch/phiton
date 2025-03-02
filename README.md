@@ -1,8 +1,11 @@
 # Phiton
 
-Phiton is a Python code compressor that converts standard Python code into a more concise notation using mathematical symbols and advanced compression techniques.
+Phiton is a Python code compressor that converts standard Python code into a more concise notation using mathematical symbols and some lightweight compression techniques. 
 
-For example, this Python code:
+```bash
+echo "#python"; cat test.py; echo; echo "#phiton"; cat test.py | python -m phiton; echo; echo; echo "#re-python"; cat test.py | python -m phiton | python -m phiton -d;
+```
+
 ```python
 def factorial(n):
     if n <= 1:
@@ -11,49 +14,53 @@ def factorial(n):
         return n * factorial(n - 1)
 ```
 
-Can be compressed to:
+Can be phitonized (compressed) to:
+
 ```
 ƒfactorialn⟨⋔n≤#1⟨⇐#1⟩⋮⇐n*factorialn-#1⟩
 ```
+
+and then dephitonized (decompressed) to: 
+
+```python
+def factorial(n):
+    if n <= 1:
+        return 1
+    else:
+        return n * factorial(n - 1)
+```
+
+Note: Not all Phiton code can be dephitonized into Python code.
 
 ## Features
 
 - Convert Python code to a compressed symbolic notation
 - Adjustable compression levels (1-5)
 - Preserve comments and type hints (optional)
-- Command-line interface with rich output
-- Support for processing individual files or entire directories
-- Detailed compression statistics
+- Command-line interface
 
 ## Installation
 
-Using pip:
-```bash
-pip install phiton
-```
-
-Using uv (recommended for faster installation):
+Using uv:
 ```bash
 uv pip install phiton
 ```
 
-Or install directly from the repository:
+or legacy pip: 
+```bash
+pip install phiton
+```
+
+Or from the repository:
 
 ```bash
-pip install git+https://github.com/twardoch/phiton.git
+uv pip install git+https://github.com/twardoch/phiton.git
 ```
 
 For development, you can install with extras:
 
 ```bash
-# Install with development dependencies
-pip install -e ".[dev]"
-
-# Install with testing dependencies
-pip install -e ".[test]"
-
-# Install with all dependencies
-pip install -e ".[all]"
+pip install -e ".[dev,test]"
 ```
 
 ## Usage
@@ -227,6 +234,3 @@ ruff format .
 
 MIT License
 
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request. 
