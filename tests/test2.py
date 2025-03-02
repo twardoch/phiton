@@ -1,6 +1,5 @@
 from flask import Flask, request, jsonify
-from werkzeug.exceptions import BadRequest, NotFound
-from database import get_db_connection, User, Post
+from database import get_db_connection, User
 
 app = Flask(__name__)
 
@@ -19,7 +18,7 @@ def get_users():
         # Build query
         query = db.query(User)
         if active_only:
-            query = query.filter(User.is_active == True)
+            query = query.filter(User.is_active is True)
 
         # Execute query with limit
         users = query.limit(limit).all()
@@ -40,7 +39,7 @@ def get_users():
         return jsonify({"users": result})
 
     except Exception as e:
-        app.logger.error(f"Error fetching users: {str(e)}")
+        app.logger.exception(f"Error fetching users: {e!s}")
         return jsonify({"error": "Internal server error"}), 500
 
 
@@ -77,5 +76,5 @@ def get_user(user_id):
         return jsonify(result)
 
     except Exception as e:
-        app.logger.error(f"Error fetching user {user_id}: {str(e)}")
+        app.logger.exception(f"Error fetching user {user_id}: {e!s}")
         return jsonify({"error": "Internal server error"}), 500
