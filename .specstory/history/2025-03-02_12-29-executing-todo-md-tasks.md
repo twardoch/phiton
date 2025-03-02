@@ -2519,6 +2519,218 @@ Now, let's update the TODO.md file:
 
 _****_
 
+```diff
+  - [x] clean up `src/phiton/` folder, remove unused/unneeded files.
+  
+- ## New Tasks
++ ## Code Quality Tasks
+  
+  - [ ] Fix linting issues:
+    - [ ] Fix variable naming conventions (N806) - use lowercase for variables
+  
++ ## Test Improvements
++ 
+  - [x] Fix pytest configuration:
+    - [x] Resolve the conflict between pytest.ini and pyproject.toml pytest configuration
+    - [ ] Fix test_config_options - comment settings not affecting output
+  
++ ## Feature Enhancements
++ 
++ - [ ] Implement decompression functionality (Phiton to Python)
++ - [ ] Add support for more complex patterns
++ - [ ] Add support for custom pattern definitions
++ - [ ] Create a web interface for online conversion
++ 
++ ## Documentation
++ 
++ - [ ] Add more examples to README.md
++ - [ ] Create detailed API documentation
++ - [ ] Add contributing guidelines
++ 
+  ## Completed Tasks
+  
+```
+
+---
+
+_****_
+
+
+
+
+
+
+
+
+
+Finally, let's update the README.md file:
+
+---
+
+_****_
+
+```diff
+  ```bash
+  pip install git+https://github.com/twardoch/phiton.git
++ ```
++ 
++ For development, you can install with extras:
++ 
++ ```bash
++ # Install with development dependencies
++ pip install -e ".[dev]"
++ 
++ # Install with testing dependencies
++ pip install -e ".[test]"
++ 
++ # Install with all dependencies
++ pip install -e ".[all]"
+  ```
+  
+  | `>=`   | `≥`    | Greater than or equal |
+  | `=`    | `≔`    | Assignment |
++ 
++ ## Project Structure
++ 
++ ```
++ phiton/
++ ├── examples/           # Example files for testing
++ ├── src/
++ │   └── phiton/         # Main package
++ │       ├── __init__.py # Package entry point
++ │       ├── __main__.py # CLI entry point
++ │       ├── cli.py      # Command-line interface
++ │       ├── config.py   # Configuration dataclass
++ │       ├── constants.py # Symbol mappings
++ │       ├── converter.py # Core conversion logic
++ │       └── utils.py    # Utility functions
++ └── tests/              # Test suite
++     ├── data/           # Test data files
++     ├── test_cli.py     # CLI tests
++     ├── test_config.py  # Configuration tests
++     ├── test_converter.py # Converter tests
++     └── test_utils.py   # Utility tests
++ ```
++ 
++ ## Development
++ 
++ ### Setup
++ 
++ 1. Clone the repository:
++    ```bash
++    git clone https://github.com/twardoch/phiton.git
++    cd phiton
++    ```
++ 
++ 2. Create and activate a virtual environment:
++    ```bash
++    python -m venv .venv
++    source .venv/bin/activate  # On Windows: .venv\Scripts\activate
++    ```
++ 
++ 3. Install development dependencies:
++    ```bash
++    pip install -e ".[dev,test]"
++    ```
++ 
++ ### Testing
++ 
++ Run the tests:
++ ```bash
++ python -m pytest
++ ```
++ 
++ Run with coverage:
++ ```bash
++ python -m pytest --cov=src/phiton
++ ```
++ 
++ ### Linting
++ 
++ Run the linter:
++ ```bash
++ ruff check .
++ ```
++ 
++ Fix linting issues:
++ ```bash
++ ruff check --fix --unsafe-fixes .
++ ```
++ 
++ Format the code:
++ ```bash
++ ruff format .
++ ```
+  
+  ## License
+```
+
+---
+
+_****_
+
+
+
+
+
+
+
+## Summary of Changes
+
+I've updated all four files to reflect the recent improvements and better organize the project:
+
+1. **PROGRESS.md**:
+   - Added a new section for project structure and organization improvements
+   - Reorganized the Next Steps section to prioritize fixing linting issues and test failures
+   - Added more detailed descriptions of tasks
+
+2. **CHANGELOG.md**:
+   - Added entries for the new improvements in the Unreleased section
+   - Added details about dependency management, project reorganization, and fixes
+   - Organized changes into Added, Changed, and Fixed sections
+
+3. **TODO.md**:
+   - Reorganized tasks into logical sections: Code Quality, Test Improvements, Feature Enhancements, and Documentation
+   - Added more detailed descriptions for each task
+   - Maintained the list of completed tasks
+
+4. **README.md**:
+   - Added information about installing with extras for development
+   - Added a Project Structure section with a directory tree
+   - Added a Development section with setup, testing, and linting instructions
+
+These updates provide a clearer picture of the project's current state, recent improvements, and future direction. The documentation now better reflects the organized structure of the codebase and provides more guidance for developers who want to contribute to the project.
+
+---
+
+_**User**_
+
+Fix @cli.py to allow input path with --input_path but otherwise reading from stdin (same for --output_path or stdout otherwise). Then Update @README.md with `uv pip install phiton` installation guidelines and include example compression in the description. Run the tool itself
+
+---
+
+_**Assistant**_
+
+I'll update the CLI to support reading from stdin and writing to stdout, then update the README with the requested changes. Let's start by examining the current CLI implementation.
+
+---
+
+_****_
+
+Read file: src/phiton/cli.py
+
+---
+
+_****_
+
+
+
+Now I'll modify the CLI to support reading from stdin and writing to stdout. Let's update the `cli.py` file:
+
+---
+
+_****_
+
 
 
 ---

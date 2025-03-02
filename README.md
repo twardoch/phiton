@@ -2,6 +2,21 @@
 
 Phiton is a Python code compressor that converts standard Python code into a more concise notation using mathematical symbols and advanced compression techniques.
 
+For example, this Python code:
+```python
+def factorial(n):
+    if n <= 1:
+        return 1
+    else:
+        return n * factorial(n - 1)
+```
+
+Can be compressed to:
+```
+ƒ factorial(n):⋔ n≤1:⇐1
+⋮⇐n*factorial(n-1)
+```
+
 ## Features
 
 - Convert Python code to a compressed symbolic notation
@@ -13,8 +28,14 @@ Phiton is a Python code compressor that converts standard Python code into a mor
 
 ## Installation
 
+Using pip:
 ```bash
 pip install phiton
+```
+
+Using uv (recommended for faster installation):
+```bash
+uv pip install phiton
 ```
 
 Or install directly from the repository:
@@ -44,6 +65,12 @@ Compress a Python file:
 
 ```bash
 python -m phiton compress example.py
+```
+
+Read from stdin and write to stdout:
+
+```bash
+cat example.py | python -m phiton compress > example.phi
 ```
 
 Preview compression without saving:

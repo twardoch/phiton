@@ -17,13 +17,6 @@ from typing import Dict, Optional, Union, Any
 
 from loguru import logger
 
-# Configure loguru
-logger.remove()
-logger.add(
-    sys.stderr,
-    level="INFO",
-    format="<green>{time:YYYY-MM-DD HH:mm:ss}</green> | <level>{level: <8}</level> | <cyan>{name}</cyan>:<cyan>{function}</cyan>:<cyan>{line}</cyan> - <level>{message}</level>",
-)
 
 # Import version
 try:
@@ -84,7 +77,7 @@ def compress_file(
     if output_file is None:
         output_file = f"{input_file}.phi"
 
-    logger.info(f"Compressing {input_file} to {output_file}")
+    logger.debug(f"Compressing {input_file} to {output_file}")
     logger.debug(f"Using compression level: {config.level}")
 
     try:
@@ -118,10 +111,10 @@ def compress_file(
 
     stats = calculate_stats(source_code, result)
 
-    logger.info(
+    logger.debug(
         f"Compression complete: {stats['original_chars']} → {stats['compressed_chars']} chars"
     )
-    logger.info(f"Compression ratio: {stats['compression_ratio']:.2f}x")
+    logger.debug(f"Compression ratio: {stats['compression_ratio']:.2f}x")
 
     return stats
 
@@ -165,10 +158,10 @@ def compress_string(
 
     stats = calculate_stats(source_code, result)
 
-    logger.info(
+    logger.debug(
         f"Compression complete: {stats['original_chars']} → {stats['compressed_chars']} chars"
     )
-    logger.info(f"Compression ratio: {stats['compression_ratio']:.2f}x")
+    logger.debug(f"Compression ratio: {stats['compression_ratio']:.2f}x")
 
     return {
         "result": result,
