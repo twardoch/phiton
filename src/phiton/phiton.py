@@ -1066,17 +1066,15 @@ def decompress_from_phiton(
         python_code = ""
         rest_of_code = phiton_code
 
-        if phiton_code.startswith('"') or phiton_code.startswith("'"):
-            quote_char = phiton_code[0]
-            docstring_end = phiton_code.find(quote_char, 1)
-            if docstring_end > 0:
-                docstring = phiton_code[: docstring_end + 1]
-                rest_of_code = phiton_code[docstring_end + 1 :]
-                # Format docstring with proper line breaks
-                docstring = docstring.strip("'\"")
-                docstring = re.sub(r"\\n", "\n", docstring)
-                docstring = re.sub(r"\s+", " ", docstring)
-                python_code = f'"""{docstring}"""\n\n'
+        # Check for docstring at the beginning
+        docstring_match = re.search(r"^['\"](.*?)['\"]", phiton_code, re.DOTALL)
+        if docstring_match:
+            docstring = docstring_match.group(1)
+            rest_of_code = phiton_code[docstring_match.end() :].lstrip()
+            # Format docstring with proper line breaks
+            docstring = re.sub(r"\\n", "\n", docstring)
+            docstring = re.sub(r"\s+", " ", docstring)
+            python_code = f'"""{docstring}"""\n\n'
 
         # Step 1: Fix special patterns before main processing
 
@@ -1099,41 +1097,48 @@ def decompress_from_phiton(
 
             i = 0
             while i < len(code):
-                char = code[i]
+                if i + 1 <= len(code):
+                    char = code[i]
 
-                # Handle block opening
-                if char == "⟨":
-                    current_line += ":"
-                    lines.append(current_line)
-                    current_line = " " * (indent_stack[-1] + 4)  # Indent next line
-                    indent_stack.append(indent_stack[-1] + 4)
-                    i += 1
-                    continue
-
-                # Handle block closing
-                elif char == "⟩":
-                    if current_line.strip():  # If there's content on the current line
+                    # Handle block opening
+                    if char == "⟨":
+                        current_line += ":"
                         lines.append(current_line)
-                    if len(indent_stack) > 1:
-                        indent_stack.pop()
-                    current_line = " " * indent_stack[-1]
-                    i += 1
-                    continue
+                        current_line = " " * (indent_stack[-1] + 4)  # Indent next line
+                        indent_stack.append(indent_stack[-1] + 4)
+                        i += 1
+                        continue
 
-                # Handle line breaks
-                elif char == "→":
-                    if current_line.strip():  # If there's content on the current line
-                        lines.append(current_line)
-                    current_line = (
-                        " " * indent_stack[-1]
-                    )  # Start new line with current indent
-                    i += 1
-                    continue
+                    # Handle block closing
+                    elif char == "⟩":
+                        if (
+                            current_line.strip()
+                        ):  # If there's content on the current line
+                            lines.append(current_line)
+                        if len(indent_stack) > 1:
+                            indent_stack.pop()
+                        current_line = " " * indent_stack[-1]
+                        i += 1
+                        continue
 
-                # Regular character
+                    # Handle line breaks
+                    elif char == "→":
+                        if (
+                            current_line.strip()
+                        ):  # If there's content on the current line
+                            lines.append(current_line)
+                        current_line = (
+                            " " * indent_stack[-1]
+                        )  # Start new line with current indent
+                        i += 1
+                        continue
+
+                    # Regular character
+                    else:
+                        current_line += char
+                        i += 1
                 else:
-                    current_line += char
-                    i += 1
+                    break
 
             # Add the last line if it has content
             if current_line.strip():
@@ -1341,6 +1346,14 @@ def decompress_from_phiton(
 
         # Fix spacing in if statements
         rest_of_code = re.sub(r"if\s+(\w+)", r"if \1", rest_of_code)
+
+        # Fix docstring formatting
+        rest_of_code = re.sub(
+            r"^([^'\"\n]*)['\"]([^'\"\n]*)['\"]", r'\1"""\2"""', rest_of_code
+        )
+
+        # Fix nested if statements
+        rest_of_code = re.sub(r"(if [^:]+): (if [^:]+):", r"\1:\n    \2:", rest_of_code)
 
         # Add the processed code to the output
         python_code += rest_of_code
