@@ -2,7 +2,7 @@
 # /// script
 # dependencies = []
 # ///
-# this_file: src/phiton/test_refactored.py
+# this_file: tests/test_refactored.py
 
 """Simple test script to verify the refactored Phiton code works correctly."""
 
@@ -14,7 +14,7 @@ parent_dir = Path(__file__).parent.parent
 if str(parent_dir) not in sys.path:
     sys.path.insert(0, str(parent_dir))
 
-from phiton import compress_string, ConversionConfig
+from phiton import phitonize_python, ConversionConfig
 
 
 def main():
@@ -39,8 +39,7 @@ if __name__ == "__main__":
     # Test different compression levels
     for level in range(1, 6):
         config = ConversionConfig(level=level)
-        compress_string(python_code, config)
-
+        phitonize_python(python_code, config)
 
 
 if __name__ == "__main__":

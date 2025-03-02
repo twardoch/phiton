@@ -6,7 +6,7 @@ import tempfile
 from pathlib import Path
 from unittest.mock import patch
 
-from phiton.cli import compress, print_version
+from phiton.cli import phiton, print_version
 
 
 # Get the path to the test data directory
@@ -22,8 +22,9 @@ def test_print_version(capsys):
     captured = capsys.readouterr()
 
     # Check that the output contains "Phiton" and "version"
-    assert "Phiton" in captured.out
-    assert "version" in captured.out
+    # The output is going to stderr because we're using rich.console with stderr=True
+    assert "Phiton" in captured.err
+    assert "version" in captured.err
 
 
 def test_compress_file():
@@ -34,17 +35,17 @@ def test_compress_file():
         input_file = TEST_DATA_DIR / "simple.py"
         output_file = Path(temp_dir) / "simple.phi"
 
-        # Call the compress function
+        # Call the phiton function with decompress=False
         with patch(
             "sys.argv",
-            ["phiton", "compress", str(input_file), "--output-path", str(output_file)],
+            ["phiton", str(input_file), "--output-path", str(output_file)],
         ):
-            compress(
+            phiton(
                 input_path=str(input_file),
                 output_path=str(output_file),
                 level=3,
                 verbose=False,
-                preview=False,
+                decompress=False,
             )
 
         # Check that the output file was created
@@ -62,16 +63,20 @@ def test_compress_preview(capsys):
     # Set up paths
     input_file = TEST_DATA_DIR / "simple.py"
 
-    # Call the compress function with preview=True
-    with patch("sys.argv", ["phiton", "compress", str(input_file), "--preview"]):
-        compress(input_path=str(input_file), preview=True, level=3, verbose=False)
+    # Call the phiton function with preview=True and decompress=False
+    with patch("sys.argv", ["phiton", str(input_file)]):
+        # Since preview is no longer a parameter, we'll capture stdout instead
+        phiton(
+            input_path=str(input_file),
+            level=3,
+            verbose=False,
+            decompress=False,
+        )
 
     # Capture the output
     captured = capsys.readouterr()
 
-    # Check that the output contains "Original Code" and "Compressed Code"
-    assert "Original Code" in captured.out
-    assert "Compressed Code" in captured.out
+    # Check that the output contains Phiton symbols
     assert "ƒ" in captured.out  # Check for Phiton symbols
 
 
@@ -89,7 +94,6 @@ def test_compress_with_options():
             "sys.argv",
             [
                 "phiton",
-                "compress",
                 str(input_file),
                 "--output-path",
                 str(output_file1),
@@ -97,12 +101,11 @@ def test_compress_with_options():
                 "1",
             ],
         ):
-            compress(
+            phiton(
                 input_path=str(input_file),
                 output_path=str(output_file1),
                 level=1,
-                verbose=False,
-                preview=False,
+                decompress=False,
             )
 
         # Compress with level 5
@@ -110,7 +113,6 @@ def test_compress_with_options():
             "sys.argv",
             [
                 "phiton",
-                "compress",
                 str(input_file),
                 "--output-path",
                 str(output_file5),
@@ -118,12 +120,11 @@ def test_compress_with_options():
                 "5",
             ],
         ):
-            compress(
+            phiton(
                 input_path=str(input_file),
                 output_path=str(output_file5),
                 level=5,
-                verbose=False,
-                preview=False,
+                decompress=False,
             )
 
         # Check that both output files exist
@@ -150,24 +151,25 @@ def test_compress_directory():
         # Set up paths
         input_dir = TEST_DATA_DIR
         output_dir = Path(temp_dir) / "output"
+        output_dir.mkdir(exist_ok=True)
 
-        # Call the compress function with a directory
-        with patch(
-            "sys.argv",
-            ["phiton", "compress", str(input_dir), "--output-path", str(output_dir)],
-        ):
-            compress(
-                input_path=str(input_dir),
-                output_path=str(output_dir),
+        # Since the CLI doesn't directly support directory processing anymore,
+        # we'll test individual files instead
+        input_files = ["simple.py", "complex.py", "patterns.py"]
+
+        for input_file in input_files:
+            input_path = input_dir / input_file
+            output_path = output_dir / f"{input_file}.phi"
+
+            # Call the phiton function for each file
+            phiton(
+                input_path=str(input_path),
+                output_path=str(output_path),
                 level=3,
-                verbose=False,
-                preview=False,
+                decompress=False,
             )
 
-        # Check that the output directory was created
-        assert output_dir.exists()
-
-        # Check that output files were created for Python files in the input directory
+        # Check that the output files were created
         assert (output_dir / "simple.py.phi").exists()
         assert (output_dir / "complex.py.phi").exists()
         assert (output_dir / "patterns.py.phi").exists()

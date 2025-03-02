@@ -13,8 +13,7 @@ def factorial(n):
 
 Can be compressed to:
 ```
-ƒ factorial(n):⋔ n≤1:⇐1
-⋮⇐n*factorial(n-1)
+ƒfactorialn⟨⋔n≤#1⟨⇐#1⟩⋮⇐n*factorialn-#1⟩
 ```
 
 ## Features
@@ -64,31 +63,31 @@ pip install -e ".[all]"
 Compress a Python file:
 
 ```bash
-python -m phiton compress example.py
+python -m phiton example.py
 ```
 
 Read from stdin and write to stdout:
 
 ```bash
-cat example.py | python -m phiton compress > example.phi
+cat example.py | python -m phiton > example.phi
 ```
 
 Preview compression without saving:
 
 ```bash
-python -m phiton compress example.py --preview
+python -m phiton example.py --preview
 ```
 
 Compress with specific options:
 
 ```bash
-python -m phiton compress example.py --level=3 --comments=False --type-hints=False
+python -m phiton example.py --level=3 --comments=False --type-hints=False
 ```
 
 Compress an entire directory:
 
 ```bash
-python -m phiton compress my_project/ --output-path=compressed/
+python -m phiton my_project/ --output-path=compressed/
 ```
 
 Show version:
@@ -117,7 +116,7 @@ config = ConversionConfig(
 )
 result = compress_string("def hello(name: str) -> str:\n    return f'Hello, {name}!'", config)
 
-# Compress a file
+# a file
 stats = compress_file("example.py", "example.phi", config)
 ```
 

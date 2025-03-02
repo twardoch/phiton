@@ -2,7 +2,7 @@
 # /// script
 # dependencies = ["loguru"]
 # ///
-# this_file: src/phiton/converter.py
+# this_file: src/phiton/phitonize.py
 
 """Python to Phiton conversion functionality."""
 
@@ -13,13 +13,16 @@ from collections.abc import Sequence
 from loguru import logger
 
 from phiton.config import ConversionConfig
-from phiton.constants import PYTHON_TO_PHITON, DOMAIN_PREFIXES, PATTERN_REPLACEMENTS, ADVANCED_PATTERNS
+from phiton.constants import (
+    PYTHON_TO_PHITON,
+    DOMAIN_PREFIXES,
+    PATTERN_REPLACEMENTS,
+    ADVANCED_PATTERNS,
+)
 from phiton.utils import optimize_imports, optimize_final
 
 
-def compress_to_phiton(
-    source_code: str, config: ConversionConfig | None = None
-) -> str:
+def phitonize_python(source_code: str, config: ConversionConfig | None = None) -> str:
     """Convert Python code to Phiton notation with enhanced compression.
 
     Args:
@@ -106,7 +109,7 @@ def compress_to_phiton(
                 return replacement
         return None
 
-    def convert_node(node: ast.AST | None) -> str:
+    def phitonize_node(node: ast.AST | None) -> str:
         """Convert an AST node to Phiton notation with enhanced compression.
 
         The compression level affects how aggressively we convert nodes:
@@ -121,7 +124,7 @@ def compress_to_phiton(
 
         # Handle Module node specially
         if isinstance(node, ast.Module):
-            return convert_body(node.body)
+            return phitonize_body(node.body)
 
         # Check for advanced patterns first
         if config.level >= 3 and (pattern := detect_advanced_pattern(node)):
@@ -144,10 +147,10 @@ def compress_to_phiton(
 
         if isinstance(node, ast.FunctionDef):
             scope_stack.append({})  # New scope
-            args = convert_arguments(node.args)
-            body = convert_body(node.body)
-            decorators = "".join(convert_node(d) for d in node.decorator_list)
-            returns = f"⦂⟮{convert_node(node.returns)}⟯" if node.returns else ""
+            args = phitonize_arguments(node.args)
+            body = phitonize_body(node.body)
+            decorators = "".join(phitonize_node(d) for d in node.decorator_list)
+            returns = f"⦂⟮{phitonize_node(node.returns)}⟯" if node.returns else ""
             scope_stack.pop()  # End scope
 
             # More readable format for lower compression levels
@@ -192,15 +195,15 @@ def compress_to_phiton(
             return repr(node.value)
 
         elif isinstance(node, ast.Return):
-            value = convert_node(node.value) if node.value else ""
+            value = phitonize_node(node.value) if node.value else ""
             if config.level <= 2:
                 return f"return {value}"
             return f"⇐{value}"
 
         elif isinstance(node, ast.If):
-            test = convert_node(node.test)
-            body = convert_body(node.body)
-            orelse = convert_body(node.orelse) if node.orelse else ""
+            test = phitonize_node(node.test)
+            body = phitonize_body(node.body)
+            orelse = phitonize_body(node.orelse) if node.orelse else ""
 
             if config.level <= 2:
                 result = f"if {test}:\n{body}"
@@ -210,9 +213,9 @@ def compress_to_phiton(
             return f"⋔{test}⟨{body}⟩{f'⋮{orelse}' if orelse else ''}"
 
         elif isinstance(node, ast.Call):
-            func = convert_node(node.func)
-            args = [convert_node(arg) for arg in node.args]
-            kwargs = [f"{kw.arg}={convert_node(kw.value)}" for kw in node.keywords]
+            func = phitonize_node(node.func)
+            args = [phitonize_node(arg) for arg in node.args]
+            kwargs = [f"{kw.arg}={phitonize_node(kw.value)}" for kw in node.keywords]
             all_args = ",".join(filter(None, [",".join(args), ",".join(kwargs)]))
 
             # Handle domain-specific library calls at higher levels
@@ -233,127 +236,127 @@ def compress_to_phiton(
             return f"{func}({all_args})"
 
         elif isinstance(node, ast.AsyncFunctionDef):
-            args = convert_arguments(node.args)
-            body = convert_body(node.body)
-            decorators = "".join(convert_node(d) for d in node.decorator_list)
-            returns = f"⦂⟮{convert_node(node.returns)}⟯" if node.returns else ""
+            args = phitonize_arguments(node.args)
+            body = phitonize_body(node.body)
+            decorators = "".join(phitonize_node(d) for d in node.decorator_list)
+            returns = f"⦂⟮{phitonize_node(node.returns)}⟯" if node.returns else ""
             return f"{decorators}⊡ƒ{node.name}({args}){returns}⟨{body}⟩"
 
         elif isinstance(node, ast.ClassDef):
-            bases = ",".join(convert_node(b) for b in node.bases)
-            body = convert_body(node.body)
-            decorators = "".join(convert_node(d) for d in node.decorator_list)
+            bases = ",".join(phitonize_node(b) for b in node.bases)
+            body = phitonize_body(node.body)
+            decorators = "".join(phitonize_node(d) for d in node.decorator_list)
             return f"{decorators}Σ{node.name}({bases})⟨{body}⟩"
 
         elif isinstance(node, ast.Yield):
-            value = convert_node(node.value) if node.value else ""
+            value = phitonize_node(node.value) if node.value else ""
             return f"↥{value}"
 
         elif isinstance(node, ast.YieldFrom):
-            value = convert_node(node.value)
+            value = phitonize_node(node.value)
             return f"↥⋮{value}"
 
         elif isinstance(node, ast.For):
-            target = convert_node(node.target)
-            iter = convert_node(node.iter)
-            body = convert_body(node.body)
-            orelse = f"⋮{convert_body(node.orelse)}" if node.orelse else ""
+            target = phitonize_node(node.target)
+            iter = phitonize_node(node.iter)
+            body = phitonize_body(node.body)
+            orelse = f"⋮{phitonize_body(node.orelse)}" if node.orelse else ""
             return f"∀{target}∈{iter}⟨{body}⟩{orelse}"
 
         elif isinstance(node, ast.While):
-            test = convert_node(node.test)
-            body = convert_body(node.body)
-            orelse = f"⋮{convert_body(node.orelse)}" if node.orelse else ""
+            test = phitonize_node(node.test)
+            body = phitonize_body(node.body)
+            orelse = f"⋮{phitonize_body(node.orelse)}" if node.orelse else ""
             return f"⟳{test}⟨{body}⟩{orelse}"
 
         elif isinstance(node, ast.ExceptHandler):
-            type = convert_node(node.type) if node.type else ""
+            type = phitonize_node(node.type) if node.type else ""
             name = f" as {node.name}" if node.name else ""
-            body = convert_body(node.body)
+            body = phitonize_body(node.body)
             return f"⋔{type}{name}⟨{body}⟩"
 
         elif isinstance(node, ast.With):
-            items = ",".join(convert_node(item) for item in node.items)
-            body = convert_body(node.body)
+            items = ",".join(phitonize_node(item) for item in node.items)
+            body = phitonize_body(node.body)
             return f"⊢⊣{items}⟨{body}⟩"
 
         elif isinstance(node, ast.Match):
-            subject = convert_node(node.subject)
-            cases = "".join(convert_node(case) for case in node.cases)
+            subject = phitonize_node(node.subject)
+            cases = "".join(phitonize_node(case) for case in node.cases)
             return f"↦{subject}⟨{cases}⟩"
 
         elif isinstance(node, ast.match_case):
-            pattern = convert_match_pattern(node.pattern)
-            guard = f"⋔{convert_node(node.guard)}" if node.guard else ""
-            body = convert_body(node.body)
+            pattern = phitonize_match_pattern(node.pattern)
+            guard = f"⋔{phitonize_node(node.guard)}" if node.guard else ""
+            body = phitonize_body(node.body)
             return f"≐{pattern}{guard}⟨{body}⟩"
 
         elif isinstance(node, ast.BinOp):
-            left = convert_node(node.left)
-            right = convert_node(node.right)
-            op = convert_operator(node.op)
+            left = phitonize_node(node.left)
+            right = phitonize_node(node.right)
+            op = phitonize_operator(node.op)
             return f"{left}{op}{right}"
 
         elif isinstance(node, ast.Compare):
-            left = convert_node(node.left)
-            ops = [convert_operator(op) for op in node.ops]
-            comparators = [convert_node(comp) for comp in node.comparators]
+            left = phitonize_node(node.left)
+            ops = [phitonize_operator(op) for op in node.ops]
+            comparators = [phitonize_node(comp) for comp in node.comparators]
             parts = [left]
             for op, comp in zip(ops, comparators, strict=False):
                 parts.extend([op, comp])
             return "".join(parts)
 
         elif isinstance(node, ast.Attribute):
-            value = convert_node(node.value)
+            value = phitonize_node(node.value)
             return f"{value}·{node.attr}"
 
         elif isinstance(node, ast.List):
-            elements = [convert_node(elt) for elt in node.elts]
+            elements = [phitonize_node(elt) for elt in node.elts]
             return f"[{','.join(elements)}]"
 
         elif isinstance(node, ast.Tuple):
-            elements = [convert_node(elt) for elt in node.elts]
+            elements = [phitonize_node(elt) for elt in node.elts]
             return f"({','.join(elements)})"
 
         elif isinstance(node, ast.Dict):
             items = [
-                f"{convert_node(k)}:{convert_node(v)}"
+                f"{phitonize_node(k)}:{phitonize_node(v)}"
                 for k, v in zip(node.keys, node.values, strict=False)
             ]
             return f"{{{','.join(items)}}}"
 
         elif isinstance(node, ast.Set):
-            elements = [convert_node(elt) for elt in node.elts]
+            elements = [phitonize_node(elt) for elt in node.elts]
             return f"{{{','.join(elements)}}}"
 
         elif isinstance(node, ast.ListComp):
-            elt = convert_node(node.elt)
+            elt = phitonize_node(node.elt)
             generators = []
             for gen in node.generators:
-                target = convert_node(gen.target)
-                iter_expr = convert_node(gen.iter)
-                ifs = [f"⋔{convert_node(if_expr)}" for if_expr in gen.ifs]
+                target = phitonize_node(gen.target)
+                iter_expr = phitonize_node(gen.iter)
+                ifs = [f"⋔{phitonize_node(if_expr)}" for if_expr in gen.ifs]
                 generators.append(f"∀{target}∈{iter_expr}{''.join(ifs)}")
             return f"⟬{elt} {' '.join(generators)}⟭"
 
         elif isinstance(node, ast.DictComp):
-            key = convert_node(node.key)
-            value = convert_node(node.value)
+            key = phitonize_node(node.key)
+            value = phitonize_node(node.value)
             generators = []
             for gen in node.generators:
-                target = convert_node(gen.target)
-                iter_expr = convert_node(gen.iter)
-                ifs = [f"⋔{convert_node(if_expr)}" for if_expr in gen.ifs]
+                target = phitonize_node(gen.target)
+                iter_expr = phitonize_node(gen.iter)
+                ifs = [f"⋔{phitonize_node(if_expr)}" for if_expr in gen.ifs]
                 generators.append(f"∀{target}∈{iter_expr}{''.join(ifs)}")
             return f"⟦{key}:{value} {' '.join(generators)}⟧"
 
         elif isinstance(node, ast.SetComp):
-            elt = convert_node(node.elt)
+            elt = phitonize_node(node.elt)
             generators = []
             for gen in node.generators:
-                target = convert_node(gen.target)
-                iter_expr = convert_node(gen.iter)
-                ifs = [f"⋔{convert_node(if_expr)}" for if_expr in gen.ifs]
+                target = phitonize_node(gen.target)
+                iter_expr = phitonize_node(gen.iter)
+                ifs = [f"⋔{phitonize_node(if_expr)}" for if_expr in gen.ifs]
                 generators.append(f"∀{target}∈{iter_expr}{''.join(ifs)}")
             return f"⦃{elt} {' '.join(generators)}⦄"
 
@@ -361,38 +364,38 @@ def compress_to_phiton(
             values = []
             for value in node.values:
                 if isinstance(value, ast.FormattedValue):
-                    values.append(f"{{{convert_node(value.value)}}}")
+                    values.append(f"{{{phitonize_node(value.value)}}}")
                 elif isinstance(value, ast.Constant):
                     values.append(str(value.value))
             return f"「{''.join(values)}」"
 
         elif isinstance(node, ast.NamedExpr):
-            target = convert_node(node.target)
-            value = convert_node(node.value)
+            target = phitonize_node(node.target)
+            value = phitonize_node(node.value)
             return f"{target}≝{value}"
 
         elif isinstance(node, ast.Starred):
-            value = convert_node(node.value)
+            value = phitonize_node(node.value)
             return f"*{value}"
 
         elif isinstance(node, ast.Lambda):
-            args = convert_arguments(node.args)
-            body = convert_node(node.body)
+            args = phitonize_arguments(node.args)
+            body = phitonize_node(node.body)
             return f"λ{args}:{body}"
 
         elif isinstance(node, ast.Subscript):
-            value = convert_node(node.value)
-            slice_expr = convert_node(node.slice)
+            value = phitonize_node(node.value)
+            slice_expr = phitonize_node(node.slice)
             return f"{value}[{slice_expr}]"
 
         elif isinstance(node, ast.Slice):
-            lower = convert_node(node.lower) if node.lower else ""
-            upper = convert_node(node.upper) if node.upper else ""
-            step = f":{convert_node(node.step)}" if node.step else ""
+            lower = phitonize_node(node.lower) if node.lower else ""
+            upper = phitonize_node(node.upper) if node.upper else ""
+            step = f":{phitonize_node(node.step)}" if node.step else ""
             return f"{lower}:{upper}{step}"
 
         elif isinstance(node, ast.UnaryOp):
-            operand = convert_node(node.operand)
+            operand = phitonize_node(node.operand)
             if isinstance(node.op, ast.Not):
                 return f"¬{operand}"
             elif isinstance(node.op, ast.USub):
@@ -403,28 +406,28 @@ def compress_to_phiton(
 
         elif isinstance(node, ast.BoolOp):
             op = "∧" if isinstance(node.op, ast.And) else "∨"
-            values = [convert_node(val) for val in node.values]
+            values = [phitonize_node(val) for val in node.values]
             return op.join(values)
 
         elif isinstance(node, ast.Await):
-            value = convert_node(node.value)
+            value = phitonize_node(node.value)
             return f"⊡{value}"
 
         elif isinstance(node, ast.AnnAssign):
-            target = convert_node(node.target)
-            annotation = convert_node(node.annotation)
-            value = f"≔{convert_node(node.value)}" if node.value else ""
+            target = phitonize_node(node.target)
+            annotation = phitonize_node(node.annotation)
+            value = f"≔{phitonize_node(node.value)}" if node.value else ""
             return f"{target}⦂{annotation}{value}"
 
         elif isinstance(node, ast.Assign):
-            targets = [convert_node(target) for target in node.targets]
-            value = convert_node(node.value)
+            targets = [phitonize_node(target) for target in node.targets]
+            value = phitonize_node(node.value)
             return f"{','.join(targets)}≔{value}"
 
         elif isinstance(node, ast.AugAssign):
-            target = convert_node(node.target)
-            op = convert_operator(node.op)
-            value = convert_node(node.value)
+            target = phitonize_node(node.target)
+            op = phitonize_operator(node.op)
+            value = phitonize_node(node.value)
             return f"{target}△{op}{value}"
 
         elif isinstance(node, ast.Pass):
@@ -437,17 +440,17 @@ def compress_to_phiton(
             return "⋯"
 
         elif isinstance(node, ast.Assert):
-            test = convert_node(node.test)
-            msg = f",{convert_node(node.msg)}" if node.msg else ""
+            test = phitonize_node(node.test)
+            msg = f",{phitonize_node(node.msg)}" if node.msg else ""
             return f"⊪{test}{msg}"
 
         elif isinstance(node, ast.Delete):
-            targets = [convert_node(target) for target in node.targets]
+            targets = [phitonize_node(target) for target in node.targets]
             return f"del {','.join(targets)}"
 
         elif isinstance(node, ast.Raise):
-            exc = convert_node(node.exc) if node.exc else ""
-            cause = f" from {convert_node(node.cause)}" if node.cause else ""
+            exc = phitonize_node(node.exc) if node.exc else ""
+            cause = f" from {phitonize_node(node.cause)}" if node.cause else ""
             return f"↑{exc}{cause}"
 
         elif isinstance(node, ast.Global):
@@ -475,22 +478,22 @@ def compress_to_phiton(
         except Exception:
             return f"<{node.__class__.__name__}>"
 
-    def convert_arguments(args: ast.arguments) -> str:
+    def phitonize_arguments(args: ast.arguments) -> str:
         """Convert function arguments to Phiton notation."""
         parts = []
         for arg in args.args:
             arg_str = arg.arg
             if config.type_hints and arg.annotation:
-                type_hint = convert_node(arg.annotation)
+                type_hint = phitonize_node(arg.annotation)
                 arg_str += f"⦂⟮{type_hint}⟯"
             parts.append(arg_str)
         return ",".join(parts)
 
-    def convert_body(body: Sequence[ast.AST]) -> str:
+    def phitonize_body(body: Sequence[ast.AST]) -> str:
         """Convert a list of statements to Phiton notation with optimizations."""
         statements = []
         for node in body:
-            stmt = convert_node(node)
+            stmt = phitonize_node(node)
             # Create local symbols for frequently used expressions
             expr = ast.unparse(node) if isinstance(node, ast.expr) else ""
             if expr and should_create_symbol(expr, expr_freq.get(expr, 0)):
@@ -503,7 +506,7 @@ def compress_to_phiton(
 
         return "→".join(optimize_expression(stmt) for stmt in statements)
 
-    def convert_operator(op: ast.operator | ast.cmpop | ast.boolop) -> str:
+    def phitonize_operator(op: ast.operator | ast.cmpop | ast.boolop) -> str:
         """Convert Python operator to Phiton symbol."""
         # Simple mapping based on operator class name
         name = op.__class__.__name__
@@ -539,12 +542,12 @@ def compress_to_phiton(
             return "¬"
         return name
 
-    def convert_match_pattern(pattern: ast.pattern | None) -> str:
+    def phitonize_match_pattern(pattern: ast.pattern | None) -> str:
         """Convert a match pattern to Phiton notation."""
         if pattern is None:
             return "_"
         if isinstance(pattern, ast.MatchValue):
-            return convert_node(pattern.value)
+            return phitonize_node(pattern.value)
         elif isinstance(pattern, ast.MatchSingleton):
             if pattern.value is None:
                 return "∅"
@@ -553,37 +556,36 @@ def compress_to_phiton(
             elif pattern.value is False:
                 return "⊥"
         elif isinstance(pattern, ast.MatchSequence):
-            patterns = [convert_match_pattern(p) for p in pattern.patterns]
+            patterns = [phitonize_match_pattern(p) for p in pattern.patterns]
             return f"[{','.join(patterns)}]"
         elif isinstance(pattern, ast.MatchStar):
             return f"*{pattern.name}" if pattern.name else "*_"
         elif isinstance(pattern, ast.MatchMapping):
             items = []
             for key, pat in zip(pattern.keys, pattern.patterns, strict=False):
-                key_str = convert_node(key)
-                pat_str = convert_match_pattern(pat)
+                key_str = phitonize_node(key)
+                pat_str = phitonize_match_pattern(pat)
                 items.append(f"{key_str}:{pat_str}")
             if pattern.rest:
                 items.append(f"**{pattern.rest}")
             return f"{{{','.join(items)}}}"
         elif isinstance(pattern, ast.MatchClass):
-            cls = convert_node(pattern.cls)
-            patterns = [convert_match_pattern(p) for p in pattern.patterns]
+            cls = phitonize_node(pattern.cls)
+            patterns = [phitonize_match_pattern(p) for p in pattern.patterns]
             kwargs = [
-                f"{k}={convert_match_pattern(p)}"
+                f"{k}={phitonize_match_pattern(p)}"
                 for k, p in zip(pattern.kwd_attrs, pattern.kwd_patterns, strict=False)
             ]
             args = patterns + kwargs
             return f"{cls}({','.join(args)})"
         elif isinstance(pattern, ast.MatchAs):
             if pattern.pattern:
-                inner = convert_match_pattern(pattern.pattern)
+                inner = phitonize_match_pattern(pattern.pattern)
                 return f"{inner} as {pattern.name}" if pattern.name else inner
             return pattern.name if pattern.name else "_"
         return "_"  # Fallback for unhandled patterns
 
-    result = convert_node(tree)
+    result = phitonize_node(tree)
 
     # Apply final optimizations
     return optimize_final(result, config.level)
-
