@@ -23,6 +23,19 @@ Or install directly from the repository:
 pip install git+https://github.com/twardoch/phiton.git
 ```
 
+For development, you can install with extras:
+
+```bash
+# Install with development dependencies
+pip install -e ".[dev]"
+
+# Install with testing dependencies
+pip install -e ".[test]"
+
+# Install with all dependencies
+pip install -e ".[all]"
+```
+
 ## Usage
 
 ### Command Line
@@ -111,6 +124,78 @@ Phiton offers 5 compression levels:
 | `<=`   | `≤`    | Less than or equal |
 | `>=`   | `≥`    | Greater than or equal |
 | `=`    | `≔`    | Assignment |
+
+## Project Structure
+
+```
+phiton/
+├── examples/           # Example files for testing
+├── src/
+│   └── phiton/         # Main package
+│       ├── __init__.py # Package entry point
+│       ├── __main__.py # CLI entry point
+│       ├── cli.py      # Command-line interface
+│       ├── config.py   # Configuration dataclass
+│       ├── constants.py # Symbol mappings
+│       ├── converter.py # Core conversion logic
+│       └── utils.py    # Utility functions
+└── tests/              # Test suite
+    ├── data/           # Test data files
+    ├── test_cli.py     # CLI tests
+    ├── test_config.py  # Configuration tests
+    ├── test_converter.py # Converter tests
+    └── test_utils.py   # Utility tests
+```
+
+## Development
+
+### Setup
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/twardoch/phiton.git
+   cd phiton
+   ```
+
+2. Create and activate a virtual environment:
+   ```bash
+   python -m venv .venv
+   source .venv/bin/activate  # On Windows: .venv\Scripts\activate
+   ```
+
+3. Install development dependencies:
+   ```bash
+   pip install -e ".[dev,test]"
+   ```
+
+### Testing
+
+Run the tests:
+```bash
+python -m pytest
+```
+
+Run with coverage:
+```bash
+python -m pytest --cov=src/phiton
+```
+
+### Linting
+
+Run the linter:
+```bash
+ruff check .
+```
+
+Fix linting issues:
+```bash
+ruff check --fix --unsafe-fixes .
+```
+
+Format the code:
+```bash
+ruff format .
+```
 
 ## License
 

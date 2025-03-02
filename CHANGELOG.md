@@ -16,6 +16,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added detailed compression statistics
 - Added proper documentation
 - Added test files
+- Added comprehensive dependency management with dev, test, and all extras
+- Created examples directory for example files
+- Added `__init__.py` to tests directory to fix namespace package issues
 
 ### Changed
 
@@ -23,11 +26,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Optimized imports handling
 - Added pattern recognition for common code patterns
 - Enhanced final optimization pass
+- Reorganized project structure with proper src, tests, and examples directories
+- Consolidated pytest configuration in pyproject.toml
 
 ### Fixed
 
 - Fixed import issues
 - Fixed type hints in CLI statistics
+- Fixed indentation error in test_optimize_imports
+- Removed redundant configuration files
+- Cleaned up unused and unneeded files
 
 ## [0.0.post1] - 2025-03-02
 

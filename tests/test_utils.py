@@ -10,13 +10,12 @@ from phiton.utils import optimize_imports, optimize_final, calculate_stats
 def test_optimize_imports():
     """Test that optimize_imports correctly optimizes import statements."""
     # Sample Python code with imports
-    code = """
-    import numpy as np
-    import pandas as pd
-    from numpy import array
-    from pandas import DataFrame
-    import matplotlib.pyplot as plt
-    """
+    code = """import numpy as np
+import pandas as pd
+from numpy import array
+from pandas import DataFrame
+import matplotlib.pyplot as plt
+"""
 
     # Parse the code into an AST
     tree = ast.parse(code)

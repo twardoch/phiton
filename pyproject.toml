@@ -34,6 +34,9 @@ test = [
     "pytest-cov>=6.0.0",
     "pytest-xdist>=3.6.1",
     "pytest>=8.3.4",
+    "numpy>=2.2.3",
+    "pandas>=2.2.3",
+    "matplotlib>=3.10.1",
 ]
 all = [
     "black>=25.1.0",
@@ -51,6 +54,10 @@ all = [
     "rich>=13.9.4",
     "ruff>=0.9.9",
     "uv>=0.6.3",
+    "numpy>=2.2.3",
+    "pandas>=2.2.3",
+    "matplotlib>=3.10.1",
+
 ]
 
 [project.scripts]
@@ -219,13 +226,13 @@ histogram = true
 storage = "file"
 save-data = true
 compare = [
-    "min", # Minimum time
-    "max", # Maximum time
-    "mean", # Mean time
+    "min",    # Minimum time
+    "max",    # Maximum time
+    "mean",   # Mean time
     "stddev", # Standard deviation
     "median", # Median time
-    "iqr", # Inter-quartile range
-    "ops", # Operations per second
+    "iqr",    # Inter-quartile range
+    "ops",    # Operations per second
     "rounds", # Number of rounds
 
 ]

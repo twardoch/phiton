@@ -5,7 +5,7 @@
 - [x] clean up `tests` folder
 - [x] clean up `src/phiton/` folder, remove unused/unneeded files.
 
-## New Tasks
+## Code Quality Tasks
 
 - [ ] Fix linting issues:
   - [ ] Fix shebang issues (EXE001) - make files executable or remove shebangs
@@ -23,9 +23,31 @@
   - [x] Add `__init__.py` to tests directory to fix implicit namespace package issues (INP001)
   - [ ] Fix variable naming conventions (N806) - use lowercase for variables
 
+## Test Improvements
+
 - [x] Fix pytest configuration:
   - [x] Resolve the conflict between pytest.ini and pyproject.toml pytest configuration
-  - [ ] Fix the `--cov=phiton` argument (should be `--cov=src/phiton`)
+  - [x] Fix the `--cov=phiton` argument (should be `--cov=src/phiton`)
+
+- [ ] Fix test failures:
+  - [x] Fix indentation error in test_optimize_imports
+  - [ ] Fix test_config_level_range - level validation issue
+  - [ ] Fix test_compress_simple_level1 and test_compress_simple_level5 - expected output mismatch
+  - [ ] Fix test_compression_levels - level 4 produces larger output than level 3
+  - [ ] Fix test_config_options - comment settings not affecting output
+
+## Feature Enhancements
+
+- [ ] Implement decompression functionality (Phiton to Python)
+- [ ] Add support for more complex patterns
+- [ ] Add support for custom pattern definitions
+- [ ] Create a web interface for online conversion
+
+## Documentation
+
+- [ ] Add more examples to README.md
+- [ ] Create detailed API documentation
+- [ ] Add contributing guidelines
 
 ## Completed Tasks
 
@@ -37,3 +59,5 @@
 - Removed .DS_Store files
 - Added `__init__.py` to tests directory to fix implicit namespace package issues
 - Removed redundant pytest.ini file since the configuration is already in pyproject.toml
+- Verified that the coverage configuration in pyproject.toml is correct
+- Fixed indentation error in test_optimize_imports
