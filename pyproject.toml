@@ -18,6 +18,9 @@ classifiers = [
 ]
 
 dependencies = [
+    "fire>=0.7.0",
+    "loguru>=0.7.3",
+    "rich>=13.9.4",
 ]
 
 
