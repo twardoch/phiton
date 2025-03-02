@@ -3,8 +3,9 @@
 """Configuration and fixtures for pytest."""
 
 import sys
-import pytest
 from pathlib import Path
+
+import pytest
 
 # Add the parent directory to sys.path to allow importing phiton
 parent_dir = Path(__file__).parent.parent

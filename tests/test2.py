@@ -1,5 +1,5 @@
-from flask import Flask, request, jsonify
-from database import get_db_connection, User
+from database import User, get_db_connection
+from flask import Flask, jsonify, request
 
 app = Flask(__name__)
 

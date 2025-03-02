@@ -10,16 +10,12 @@ import sys
 from pathlib import Path
 
 import fire
+from loguru import logger
 from rich.console import Console
 from rich.table import Table
-from loguru import logger
-from phiton import (
-    phitonize,
-    dephitonize,
-    __version__,
-)
-from phiton.config import ConversionConfig
 
+from phiton import __version__, dephitonize, phitonize
+from phiton.config import ConversionConfig
 
 console = Console(stderr=True)
 

@@ -3,10 +3,10 @@
 """Tests for the Phiton converter module."""
 
 from pathlib import Path
+
 import pytest
 
-from phiton import phitonize_python, ConversionConfig
-
+from phiton import ConversionConfig, phitonize_python
 
 # Get the path to the test data directory
 TEST_DATA_DIR = Path(__file__).parent / "data"

@@ -4,7 +4,7 @@
 
 import ast
 
-from phiton.utils import optimize_imports, optimize_final, calculate_stats
+from phiton.utils import calculate_stats, optimize_final, optimize_imports
 
 
 def test_optimize_imports():

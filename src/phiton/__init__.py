@@ -17,7 +17,6 @@ from typing import Any
 
 from loguru import logger
 
-
 # Import version
 try:
     from phiton.__version__ import __version__, version
@@ -27,8 +26,8 @@ except ImportError:
 
 # Import core components
 from phiton.config import ConversionConfig
-from phiton.phitonize import phitonize_python
 from phiton.dephitonize import dephitonize_phiton
+from phiton.phitonize import phitonize_python
 from phiton.utils import calculate_stats, optimize_final
 
 __all__ = [

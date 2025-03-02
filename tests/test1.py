@@ -1,8 +1,8 @@
 def analyze_dataset(file_path, target_column=None):
     """Analyze a dataset and return summary statistics and visualizations."""
-    import pandas as pd
-    import numpy as np
     import matplotlib.pyplot as plt
+    import numpy as np
+    import pandas as pd
     from sklearn.preprocessing import StandardScaler
 
     # Load and prepare data

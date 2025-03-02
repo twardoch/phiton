@@ -8,7 +8,6 @@ from unittest.mock import patch
 
 from phiton.cli import phiton, print_version
 
-
 # Get the path to the test data directory
 TEST_DATA_DIR = Path(__file__).parent / "data"
 

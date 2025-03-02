@@ -9,7 +9,7 @@
 import ast
 import re
 
-from phiton.constants import DOMAIN_PREFIXES, COMMON_SUBEXPRESSIONS
+from phiton.constants import COMMON_SUBEXPRESSIONS, DOMAIN_PREFIXES
 
 
 def optimize_imports(tree: ast.AST) -> list[str]:
