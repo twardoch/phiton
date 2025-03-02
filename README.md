@@ -2,6 +2,10 @@
 
 Phiton is a Python code compressor that converts standard Python code into a more concise notation using mathematical symbols and some lightweight compression techniques. 
 
+Phiton compresses Python into Unicode symbols. Control flow symbols (⇐ for return, ↥ for yield, ⟳ for while, ∀ for for, ⋔ for if, ⋮ for else, ⊘ for pass, ⊠ for break, ⋯ for continue), operators (≔ for =, ≡ for ==, ≠ for !=, ∈ for in, ∉ for not in, ∧ for and, ∨ for or, ¬ for not, ≤ for <=, ≥ for >=), special values (∅ for None, ⊤ for True, ⊥ for False), function definitions (ƒ for def, λ for lambda, Σ for class, ⊡ for async/await), block structure (⟨...⟩ for indented blocks, → for statement separator), common functions (ℓ for len, ℜ for range, ℯ for enumerate, φ for filter, ℤ for zip, ς for sorted, ℛ for reversed), domain prefixes (№ for numpy, ℗ for pandas, χ for sklearn, μ for matplotlib, Ψ for torch, Φ for tensorflow), and literals (#123 for numbers, $text for strings).
+
+---
+
 ```bash
 echo "#python"; cat test.py; echo; echo "#phiton"; cat test.py | python -m phiton; echo; echo; echo "#re-python"; cat test.py | python -m phiton | python -m phiton -d;
 ```
