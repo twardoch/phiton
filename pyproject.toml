@@ -61,7 +61,7 @@ all = [
 ]
 
 [project.scripts]
-
+phiton = "phiton.__main__:main"
 # CLINAME = "phiton.__main__:main"
 [[project.authors]]
 name = "Adam Twardoch"
