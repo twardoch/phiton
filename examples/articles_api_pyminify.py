@@ -44,7 +44,7 @@ _A=None
 import warnings
 
 from d361api.api_client import ApiClient
-from pydantic import (validate_call)
+from pydantic import validate_call
 
 
 class ArticlesApi:
