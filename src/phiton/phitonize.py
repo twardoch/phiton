@@ -13,8 +13,12 @@ from collections.abc import Sequence
 from loguru import logger
 
 from phiton.config import ConversionConfig
-from phiton.constants import (ADVANCED_PATTERNS, DOMAIN_PREFIXES,
-                              PATTERN_REPLACEMENTS, PYTHON_TO_PHITON)
+from phiton.constants import (
+    ADVANCED_PATTERNS,
+    DOMAIN_PREFIXES,
+    PATTERN_REPLACEMENTS,
+    PYTHON_TO_PHITON,
+)
 from phiton.utils import optimize_final, optimize_imports
 
 

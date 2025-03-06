@@ -18,8 +18,10 @@ def analyze_dataset(file_path, target_column=None):
     # Summary statistics
     summary = {
         "numeric_stats": df[numeric_cols].describe(),
-        "categorical_counts": {col: df[col].value_counts() for col in categorical_cols[:5]},
-        "correlation": df[numeric_cols].corr()
+        "categorical_counts": {
+            col: df[col].value_counts() for col in categorical_cols[:5]
+        },
+        "correlation": df[numeric_cols].corr(),
     }
 
     # Visualization
@@ -32,7 +34,11 @@ def analyze_dataset(file_path, target_column=None):
     if target_column and target_column in df.columns:
         # Correlation with target
         if target_column in numeric_cols:
-            target_corr = df[numeric_cols].corrwith(df[target_column]).sort_values(ascending=False)
+            target_corr = (
+                df[numeric_cols]
+                .corrwith(df[target_column])
+                .sort_values(ascending=False)
+            )
             summary["target_correlation"] = target_corr
 
         # Feature importance
@@ -46,15 +52,15 @@ def analyze_dataset(file_path, target_column=None):
 
             # Train a simple model
             from sklearn.ensemble import RandomForestRegressor
+
             model = RandomForestRegressor(n_estimators=50, random_state=42)
             model.fit(X_scaled, y)
 
             # Get feature importance
             importance = model.feature_importances_
-            feature_imp = pd.DataFrame({
-                "Feature": numeric_cols,
-                "Importance": importance
-            }).sort_values("Importance", ascending=False)
+            feature_imp = pd.DataFrame(
+                {"Feature": numeric_cols, "Importance": importance}
+            ).sort_values("Importance", ascending=False)
 
             summary["feature_importance"] = feature_imp
 

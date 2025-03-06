@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """A simple Python file for testing Phiton conversion."""
+
 import contextlib
 
 
@@ -37,7 +38,6 @@ def divide(a: int, b: int) -> float:
 def main():
     """Main function to demonstrate the operations."""
     x = 10
-
 
     # Test error handling
     with contextlib.suppress(ValueError):
