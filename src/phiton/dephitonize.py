@@ -149,7 +149,7 @@ def _reconstruct_blocks_and_lines(code: str) -> str:
             next_line_indent = len(lines[i+1]) - len(lines[i+1].lstrip())
             if next_line_indent > current_line_indent:
                 if not lines[i].rstrip().endswith(":"): # Check rstrip to handle potential trailing spaces before colon
-                    lines[i] = lines[i].rstrip() + ":"
+                    lines[i] = f"{lines[i].rstrip()}:"
     final_code = "\n".join(lines)
 
     return final_code.strip()
