@@ -9,15 +9,15 @@
 import sys
 from pathlib import Path
 
-# Add the parent directory to sys.path to allow importing phiton
-parent_dir = Path(__file__).parent.parent
-if str(parent_dir) not in sys.path:
-    sys.path.insert(0, str(parent_dir))
-
 from phiton import ConversionConfig, phitonize_python
 
 
 def main():
+    # Add the parent directory to sys.path to allow importing phiton
+    parent_dir = Path(__file__).parent.parent
+    if str(parent_dir) not in sys.path:
+        sys.path.insert(0, str(parent_dir))
+
     """Test the refactored Phiton code with a simple example."""
     # Sample Python code
     python_code = """

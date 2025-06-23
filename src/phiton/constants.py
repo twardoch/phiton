@@ -47,7 +47,7 @@ PYTHON_TO_PHITON = {
     "None": "∅",
     "True": "⊤",
     "False": "⊥",
-    "...": "⋮",
+    # "...": "⋮", # Removed conflict: ⋮ is primarily for 'else' and block structure. Ellipsis (...) should be handled as a literal or have its own symbol.
     # Objects & Functions
     "def": "ƒ",
     "lambda": "λ",
@@ -68,7 +68,7 @@ PYTHON_TO_PHITON = {
     "sorted": "ς",
     "reversed": "ℛ",
     "any": "∃",
-    "all": "∀",
+    # "all": "∀", # This conflicts with "for" loop. 'for' is more fundamental.
     "min": "↓",
     "max": "↑",
     "round": "○",
@@ -80,8 +80,11 @@ PYTHON_TO_PHITON = {
     "setattr": "⊲",
     "delattr": "⊗",
     "super": "↰",
-    "next": "→",
+    # "next": "→", # → is a structural token for newline, not for next()
     "iter": "⟲",
+    "is": "⁇",
+    "is not": "⁇¬", # For is not
+    "print": "Π",
 }
 
 # Reverse mapping for Phiton to Python conversion
