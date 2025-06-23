@@ -91,8 +91,12 @@ def phitonize_python(source_code: str, config: ConversionConfig | None = None) -
 
     def optimize_expression(expr: str) -> str:
         """Apply additional compression optimizations to an expression."""
-        # Remove unnecessary parentheses
-        expr = re.sub(r"\(\s*([^,()]+)\s*\)", r"\1", expr)
+        # Remove unnecessary parentheses, but be careful with function call/def parentheses
+        # This regex is too aggressive: expr = re.sub(r"\(\s*([^,()]+)\s*\)", r"\1", expr)
+        # For now, let's rely on later stages or specific rules for parenthesis removal.
+        # A common case is ((x)) -> (x)
+        expr = re.sub(r"\(\(([^()]*)\)\)", r"(\1)", expr)
+
         # Compress whitespace
         expr = re.sub(r"\s+", "", expr)
         # Apply common patterns
@@ -141,9 +145,9 @@ def phitonize_python(source_code: str, config: ConversionConfig | None = None) -
                 expr = ast.unparse(node) if isinstance(node, ast.expr) else ""
                 if expr:
                     expr_freq[expr] = expr_freq.get(expr, 0) + 1
-            except Exception:
-                # Skip if unparsing fails
-                pass
+            except Exception as e:
+                # Skip if unparsing fails, but log it for debugging
+                logger.trace(f"Could not unparse node for frequency tracking: {node} - {e}")
 
         if isinstance(node, ast.FunctionDef):
             scope_stack.append({})  # New scope
@@ -257,23 +261,23 @@ def phitonize_python(source_code: str, config: ConversionConfig | None = None) -
             return f"↥⋮{value}"
 
         elif isinstance(node, ast.For):
-            target = phitonize_node(node.target)
-            iter = phitonize_node(node.iter)
-            body = phitonize_body(node.body)
-            orelse = f"⋮{phitonize_body(node.orelse)}" if node.orelse else ""
-            return f"∀{target}∈{iter}⟨{body}⟩{orelse}"
+            target_ph = phitonize_node(node.target)
+            iter_ph = phitonize_node(node.iter)
+            body_ph = phitonize_body(node.body)
+            orelse_ph = f"⋮{phitonize_body(node.orelse)}" if node.orelse else ""
+            return f"∀{target_ph}∈{iter_ph}⟨{body_ph}⟩{orelse_ph}"
 
         elif isinstance(node, ast.While):
-            test = phitonize_node(node.test)
-            body = phitonize_body(node.body)
-            orelse = f"⋮{phitonize_body(node.orelse)}" if node.orelse else ""
-            return f"⟳{test}⟨{body}⟩{orelse}"
+            test_ph = phitonize_node(node.test)
+            body_ph = phitonize_body(node.body)
+            orelse_ph = f"⋮{phitonize_body(node.orelse)}" if node.orelse else ""
+            return f"⟳{test_ph}⟨{body_ph}⟩{orelse_ph}"
 
         elif isinstance(node, ast.ExceptHandler):
-            type = phitonize_node(node.type) if node.type else ""
-            name = f" as {node.name}" if node.name else ""
-            body = phitonize_body(node.body)
-            return f"⋔{type}{name}⟨{body}⟩"
+            type_ph = phitonize_node(node.type) if node.type else ""
+            name_ph = f" as {node.name}" if node.name else ""
+            body_ph = phitonize_body(node.body)
+            return f"⋔{type_ph}{name_ph}⟨{body_ph}⟩"
 
         elif isinstance(node, ast.With):
             items = ",".join(phitonize_node(item) for item in node.items)
@@ -504,7 +508,7 @@ def phitonize_python(source_code: str, config: ConversionConfig | None = None) -
             else:
                 statements.append(stmt)
 
-        return "→".join(optimize_expression(stmt) for stmt in statements)
+        return "→".join(optimize_expression(s) for s in statements if s) # ensure no empty strings
 
     def phitonize_operator(op: ast.operator | ast.cmpop | ast.boolop) -> str:
         """Convert Python operator to Phiton symbol."""
@@ -534,6 +538,10 @@ def phitonize_python(source_code: str, config: ConversionConfig | None = None) -
             return "∈"
         elif name == "NotIn":
             return "∉"
+        elif name == "Is":
+            return PYTHON_TO_PHITON.get("is", "is") # Use symbol if defined
+        elif name == "IsNot":
+            return PYTHON_TO_PHITON.get("is not", "is not") # Use symbol if defined (needs "is not": "⁇¬")
         elif name == "And":
             return "∧"
         elif name == "Or":

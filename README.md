@@ -42,6 +42,7 @@ Note: Not all Phiton code can be dephitonized into Python code.
 - Adjustable compression levels (1-5)
 - Preserve comments and type hints (optional)
 - Command-line interface
+- Decompression from Phiton back to Python (experimental)
 
 ## Installation
 
@@ -161,6 +162,9 @@ Phiton offers 5 compression levels:
 | `<=`   | `≤`    | Less than or equal |
 | `>=`   | `≥`    | Greater than or equal |
 | `=`    | `≔`    | Assignment |
+| `is`   | `⁇`    | Identity |
+| `is not`| `⁇¬`   | Negated identity |
+| `print`| `Π`    | Print function |
 
 ## Project Structure
 

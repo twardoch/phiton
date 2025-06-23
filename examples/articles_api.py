@@ -3284,7 +3284,9 @@ class ArticlesApi:
         :return: Returns the result object.
         """
         warnings.warn(
-            "POST /v2/Articles/{articleId}/publish is deprecated.", DeprecationWarning
+            "POST /v2/Articles/{articleId}/publish is deprecated.",
+            DeprecationWarning,
+            stacklevel=2,
         )
 
         _param = self._v2_articles_article_id_publish_post_serialize(
@@ -3355,7 +3357,9 @@ class ArticlesApi:
         :return: Returns the result object.
         """
         warnings.warn(
-            "POST /v2/Articles/{articleId}/publish is deprecated.", DeprecationWarning
+            "POST /v2/Articles/{articleId}/publish is deprecated.",
+            DeprecationWarning,
+            stacklevel=2,
         )
 
         _param = self._v2_articles_article_id_publish_post_serialize(
@@ -3426,7 +3430,9 @@ class ArticlesApi:
         :return: Returns the result object.
         """
         warnings.warn(
-            "POST /v2/Articles/{articleId}/publish is deprecated.", DeprecationWarning
+            "POST /v2/Articles/{articleId}/publish is deprecated.",
+            DeprecationWarning,
+            stacklevel=2,
         )
 
         _param = self._v2_articles_article_id_publish_post_serialize(
@@ -3561,7 +3567,9 @@ class ArticlesApi:
         :return: Returns the result object.
         """
         warnings.warn(
-            "GET /v2/Articles/{articleId}/settings is deprecated.", DeprecationWarning
+            "GET /v2/Articles/{articleId}/settings is deprecated.",
+            DeprecationWarning,
+            stacklevel=2,
         )
 
         _param = self._v2_articles_article_id_settings_get_serialize(
@@ -3628,7 +3636,9 @@ class ArticlesApi:
         :return: Returns the result object.
         """
         warnings.warn(
-            "GET /v2/Articles/{articleId}/settings is deprecated.", DeprecationWarning
+            "GET /v2/Articles/{articleId}/settings is deprecated.",
+            DeprecationWarning,
+            stacklevel=2,
         )
 
         _param = self._v2_articles_article_id_settings_get_serialize(
@@ -3695,7 +3705,9 @@ class ArticlesApi:
         :return: Returns the result object.
         """
         warnings.warn(
-            "GET /v2/Articles/{articleId}/settings is deprecated.", DeprecationWarning
+            "GET /v2/Articles/{articleId}/settings is deprecated.",
+            DeprecationWarning,
+            stacklevel=2,
         )
 
         _param = self._v2_articles_article_id_settings_get_serialize(
@@ -3814,7 +3826,9 @@ class ArticlesApi:
         :return: Returns the result object.
         """
         warnings.warn(
-            "PUT /v2/Articles/{articleId}/settings is deprecated.", DeprecationWarning
+            "PUT /v2/Articles/{articleId}/settings is deprecated.",
+            DeprecationWarning,
+            stacklevel=2,
         )
 
         _param = self._v2_articles_article_id_settings_put_serialize(
@@ -3885,7 +3899,9 @@ class ArticlesApi:
         :return: Returns the result object.
         """
         warnings.warn(
-            "PUT /v2/Articles/{articleId}/settings is deprecated.", DeprecationWarning
+            "PUT /v2/Articles/{articleId}/settings is deprecated.",
+            DeprecationWarning,
+            stacklevel=2,
         )
 
         _param = self._v2_articles_article_id_settings_put_serialize(
@@ -3956,7 +3972,9 @@ class ArticlesApi:
         :return: Returns the result object.
         """
         warnings.warn(
-            "PUT /v2/Articles/{articleId}/settings is deprecated.", DeprecationWarning
+            "PUT /v2/Articles/{articleId}/settings is deprecated.",
+            DeprecationWarning,
+            stacklevel=2,
         )
 
         _param = self._v2_articles_article_id_settings_put_serialize(
@@ -4099,6 +4117,7 @@ class ArticlesApi:
         warnings.warn(
             "PUT /v2/Articles/{articleId}/updateDescription is deprecated.",
             DeprecationWarning,
+            stacklevel=2,
         )
 
         _param = self._v2_articles_article_id_update_description_put_serialize(
@@ -4174,6 +4193,7 @@ class ArticlesApi:
         warnings.warn(
             "PUT /v2/Articles/{articleId}/updateDescription is deprecated.",
             DeprecationWarning,
+            stacklevel=2,
         )
 
         _param = self._v2_articles_article_id_update_description_put_serialize(
@@ -4249,6 +4269,7 @@ class ArticlesApi:
         warnings.warn(
             "PUT /v2/Articles/{articleId}/updateDescription is deprecated.",
             DeprecationWarning,
+            stacklevel=2,
         )
 
         _param = self._v2_articles_article_id_update_description_put_serialize(
@@ -4376,6 +4397,7 @@ class ArticlesApi:
         warnings.warn(
             "DELETE /v2/Articles/{articleId}/version/{versionNumber} is deprecated.",
             DeprecationWarning,
+            stacklevel=2,
         )
 
         _param = self._v2_articles_article_id_version_version_number_delete_serialize(
@@ -4450,6 +4472,7 @@ class ArticlesApi:
         warnings.warn(
             "DELETE /v2/Articles/{articleId}/version/{versionNumber} is deprecated.",
             DeprecationWarning,
+            stacklevel=2,
         )
 
         _param = self._v2_articles_article_id_version_version_number_delete_serialize(
@@ -4524,6 +4547,7 @@ class ArticlesApi:
         warnings.warn(
             "DELETE /v2/Articles/{articleId}/version/{versionNumber} is deprecated.",
             DeprecationWarning,
+            stacklevel=2,
         )
 
         _param = self._v2_articles_article_id_version_version_number_delete_serialize(
@@ -4643,7 +4667,9 @@ class ArticlesApi:
         :return: Returns the result object.
         """
         warnings.warn(
-            "GET /v2/Articles/{articleId}/versions is deprecated.", DeprecationWarning
+            "GET /v2/Articles/{articleId}/versions is deprecated.",
+            DeprecationWarning,
+            stacklevel=2,
         )
 
         _param = self._v2_articles_article_id_versions_get_serialize(
@@ -4710,7 +4736,9 @@ class ArticlesApi:
         :return: Returns the result object.
         """
         warnings.warn(
-            "GET /v2/Articles/{articleId}/versions is deprecated.", DeprecationWarning
+            "GET /v2/Articles/{articleId}/versions is deprecated.",
+            DeprecationWarning,
+            stacklevel=2,
         )
 
         _param = self._v2_articles_article_id_versions_get_serialize(
@@ -4777,7 +4805,9 @@ class ArticlesApi:
         :return: Returns the result object.
         """
         warnings.warn(
-            "GET /v2/Articles/{articleId}/versions is deprecated.", DeprecationWarning
+            "GET /v2/Articles/{articleId}/versions is deprecated.",
+            DeprecationWarning,
+            stacklevel=2,
         )
 
         _param = self._v2_articles_article_id_versions_get_serialize(
@@ -4916,6 +4946,7 @@ class ArticlesApi:
         warnings.warn(
             "GET /v2/Articles/{articleId}/versions/{versionNumber} is deprecated.",
             DeprecationWarning,
+            stacklevel=2,
         )
 
         _param = self._v2_articles_article_id_versions_version_number_get_serialize(
@@ -5008,6 +5039,7 @@ class ArticlesApi:
         warnings.warn(
             "GET /v2/Articles/{articleId}/versions/{versionNumber} is deprecated.",
             DeprecationWarning,
+            stacklevel=2,
         )
 
         _param = self._v2_articles_article_id_versions_version_number_get_serialize(
@@ -5100,6 +5132,7 @@ class ArticlesApi:
         warnings.warn(
             "GET /v2/Articles/{articleId}/versions/{versionNumber} is deprecated.",
             DeprecationWarning,
+            stacklevel=2,
         )
 
         _param = self._v2_articles_article_id_versions_version_number_get_serialize(

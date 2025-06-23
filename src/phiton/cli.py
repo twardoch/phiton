@@ -52,11 +52,11 @@ def phiton(
     input_path: str | Path | None = None,
     output_path: str | Path | None = None,
     level: int = 5,
-    *,
     comments: bool = True,
     type_hints: bool = True,
     minify: bool = True,
     symbols: bool = True,
+    *,
     verbose: bool = False,
     decompress: bool = False,
 ) -> None:
@@ -66,12 +66,12 @@ def phiton(
         input_path: Path to file or directory to process (stdin if not provided)
         output_path: Path to save the processed output (stdout if not provided)
         level: Compression level (1-5, where 5 is maximum compression)
-        comments: Whether to preserve comments
-        type_hints: Whether to preserve type hints
-        minify: Whether to minify the code
-        symbols: Whether to use symbol substitution
-        verbose: Whether to print verbose output
-        decompress: Whether to decompress Phiton to Python (default is to compress Python to Phiton)
+        comments: Whether to preserve comments (keyword-only)
+        type_hints: Whether to preserve type hints (keyword-only)
+        minify: Whether to minify the code (keyword-only)
+        symbols: Whether to use symbol substitution (keyword-only)
+        verbose: Whether to print verbose output (keyword-only)
+        decompress: Whether to decompress Phiton to Python (default is to compress Python to Phiton) (keyword-only)
     """
 
     config = ConversionConfig(

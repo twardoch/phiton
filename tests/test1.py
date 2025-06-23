@@ -1,10 +1,12 @@
+import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.preprocessing import StandardScaler
+
+
 def analyze_dataset(file_path, target_column=None):
     """Analyze a dataset and return summary statistics and visualizations."""
-    import matplotlib.pyplot as plt
-    import numpy as np
-    import pandas as pd
-    from sklearn.preprocessing import StandardScaler
-
     # Load and prepare data
     df = pd.read_csv(file_path)
 
@@ -43,18 +45,16 @@ def analyze_dataset(file_path, target_column=None):
 
         # Feature importance
         if target_column in numeric_cols:
-            X = df.drop(columns=[target_column])
-            y = df[target_column]
+            x_features = df.drop(columns=[target_column])
+            y_target = df[target_column]
 
             # Scale features
             scaler = StandardScaler()
-            X_scaled = scaler.fit_transform(X[numeric_cols])
+            x_scaled = scaler.fit_transform(x_features[numeric_cols])
 
             # Train a simple model
-            from sklearn.ensemble import RandomForestRegressor
-
             model = RandomForestRegressor(n_estimators=50, random_state=42)
-            model.fit(X_scaled, y)
+            model.fit(x_scaled, y_target)
 
             # Get feature importance
             importance = model.feature_importances_

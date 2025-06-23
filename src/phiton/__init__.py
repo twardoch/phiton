@@ -12,7 +12,6 @@ and advanced compression techniques. The goal is to create the most compact repr
 of Python code while maintaining the ability to convert back to standard Python.
 """
 
-import sys
 from typing import Any
 
 from loguru import logger

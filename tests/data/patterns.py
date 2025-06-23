@@ -3,6 +3,8 @@
 
 import os
 import re
+import time
+from functools import reduce, wraps
 
 
 def list_comprehension_examples():
@@ -97,9 +99,7 @@ def function_patterns():
     evens = list(filter(lambda x: x % 2 == 0, numbers))
 
     # Reduce function
-    from functools import reduce
-
-    product = reduce(lambda x, y: x * y, numbers)
+    product = reduce(lambda x_val, y_val: x_val * y_val, numbers)
 
     # Function with default arguments
     def greet(name, greeting="Hello"):
@@ -110,12 +110,11 @@ def function_patterns():
         return {"args": args, "kwargs": kwargs}
 
     # Decorator example
-    def timing_decorator(func):
+    def timing_decorator(func_to_decorate):
+        @wraps(func_to_decorate)
         def wrapper(*args, **kwargs):
-            import time
-
             time.time()
-            result = func(*args, **kwargs)
+            result = func_to_decorate(*args, **kwargs)
             time.time()
             return result
 
@@ -123,8 +122,6 @@ def function_patterns():
 
     @timing_decorator
     def slow_function():
-        import time
-
         time.sleep(0.1)
         return "Done"
 
@@ -198,7 +195,7 @@ def string_manipulation_patterns():
     age = 30
     formatted1 = f"{name} is {age} years old"
     formatted2 = f"{name} is {age} years old"
-    formatted3 = "%s is %d years old" % (name, age)
+    formatted3 = f"{name!s} is {age:d} years old"
 
     # String methods
     s = "  Hello, World!  "
@@ -271,27 +268,12 @@ def file_operation_patterns():
 
 def main():
     """Run all pattern examples and print results."""
-    list_results = list_comprehension_examples()
-    for key in list_results:
-        pass
-
-    for _result in control_flow_patterns():
-        pass
-
-    func_results = function_patterns()
-    for key in func_results:
-        if key != "slow_function":  # Skip printing the timing output
-            pass
-
-    for _result in error_handling_patterns():
-        pass
-
-    string_results = string_manipulation_patterns()
-    for key in string_results:
-        pass
-
-    for _result in file_operation_patterns():
-        pass
+    list_comprehension_examples()
+    control_flow_patterns()
+    function_patterns()
+    error_handling_patterns()
+    string_manipulation_patterns()
+    file_operation_patterns()
 
 
 if __name__ == "__main__":

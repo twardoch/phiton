@@ -75,6 +75,8 @@ Mathematical and logical symbols are used for operators:
 | `∧` | `and` | Logical AND | Logical conjunction symbol |
 | `∨` | `or` | Logical OR | Logical disjunction symbol |
 | `¬` | `not` | Logical NOT | Logical negation symbol |
+| `⁇` | `is` | Identity test | Question mark for "is it?" |
+| `⁇¬` | `is not` | Negated identity test | Negated question mark |
 
 #### 2.3.3. Special Values
 
@@ -122,6 +124,7 @@ Common Python built-ins have mathematical equivalents:
 | `○` | `round` | Round function | Circle for rounding |
 | `∥` | `abs` | Absolute value | Parallel lines |
 | `^` | `pow` | Power function | Caret for exponentiation |
+| `Π` | `print` | Print function | Capital Pi for "output" |
 
 #### 2.3.6. Object Operations
 

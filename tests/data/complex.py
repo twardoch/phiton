@@ -2,8 +2,8 @@
 """A complex Python file for testing Phiton conversion with advanced features."""
 
 import math
-import random
 from dataclasses import dataclass
+from random import random, uniform
 from typing import Any
 
 
@@ -144,17 +144,17 @@ def generate_random_shapes(count: int) -> ShapeCollection:
 
     for _ in range(count):
         # Generate random parameters
-        x = random.uniform(-10, 10)
-        y = random.uniform(-10, 10)
+        x = uniform(-10, 10)
+        y = uniform(-10, 10)
         point = Point(x, y)
 
         # Randomly choose between Circle and Rectangle
-        if random.random() < 0.5:
-            radius = random.uniform(1, 5)
+        if random() < 0.5:
+            radius = uniform(1, 5)
             collection.add_shape(Circle(point, radius))
         else:
-            width = random.uniform(1, 5)
-            height = random.uniform(1, 5)
+            width = uniform(1, 5)
+            height = uniform(1, 5)
             collection.add_shape(Rectangle(point, width, height))
 
     return collection

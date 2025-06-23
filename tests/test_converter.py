@@ -28,14 +28,15 @@ def test_compress_simple_level1():
     config = ConversionConfig(level=1)
     result = phitonize_python(source_code, config)
 
-    # Check that the result is a non-empty string
-    assert isinstance(result, str)
-    assert len(result) > 0
+    # Read the expected output
+    expected_output_path = EXPECTED_DIR / "simple_level1.phi"
+    # import os # Would need this for hypothetical UPDATE_EXPECTED_FILES
+    # if os.environ.get("UPDATE_EXPECTED_FILES"):
+    #     expected_output_path.write_text(result, encoding="utf-8")
+    expected_output = read_file(expected_output_path)
 
-    # Check for some expected Phiton symbols
-    assert "⦂" in result  # Type annotation symbol
-    assert "⟮" in result  # Type bracket open
-    assert "⟯" in result  # Type bracket close
+    # Check that the result matches the expected output
+    assert result == expected_output.strip()
 
 
 def test_compress_simple_level5():
@@ -47,15 +48,15 @@ def test_compress_simple_level5():
     config = ConversionConfig(level=5)
     result = phitonize_python(source_code, config)
 
-    # Check that the result is a non-empty string
-    assert isinstance(result, str)
-    assert len(result) > 0
+    # Read the expected output
+    expected_output_path = EXPECTED_DIR / "simple_level5.phi"
+    # import os # Would need this for hypothetical UPDATE_EXPECTED_FILES
+    # if os.environ.get("UPDATE_EXPECTED_FILES"):
+    #     expected_output_path.write_text(result, encoding="utf-8")
+    expected_output = read_file(expected_output_path)
 
-    # Check for some expected Phiton symbols at level 5
-    assert "⦂" in result  # Type annotation symbol
-    assert "⟮" in result  # Type bracket open
-    assert "⟯" in result  # Type bracket close
-    assert "ƒ" in result  # Function symbol
+    # Check that the result matches the expected output
+    assert result == expected_output.strip()
 
 
 def test_compression_levels():
