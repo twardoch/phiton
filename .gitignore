@@ -267,6 +267,7 @@ wheels/
 MANIFEST
 
 # Distribution / packaging
+dist/
 !dist/.gitkeep
 
 # Unit test / coverage reports

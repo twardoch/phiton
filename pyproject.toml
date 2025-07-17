@@ -16,7 +16,19 @@ classifiers = [
     "Programming Language :: Python :: Implementation :: CPython",
     "Programming Language :: Python :: Implementation :: PyPy",
 ]
-dependencies = ["fire>=0.7.0", "loguru>=0.7.3", "rich>=13.9.4"]
+dependencies = [
+    "build>=1.2.2.post1",
+    "fire>=0.7.0",
+    "hatch-vcs>=0.5.0",
+    "hatchling>=1.27.0",
+    "loguru>=0.7.3",
+    "pytest>=8.3.4",
+    "pytest-benchmark>=5.1.0",
+    "pytest-cov>=6.0.0",
+    "pytest-xdist>=3.8.0",
+    "rich>=13.9.4",
+    "ruff>=0.9.9",
+]
 
 [project.optional-dependencies]
 dev = [
