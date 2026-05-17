@@ -1,30 +1,28 @@
 # Expected Output Files
 
-This directory contains expected output files for testing Phiton conversion.
+This directory contains expected output files for Phiton conversion testing.
 
 ## File Naming Convention
 
-Files are named according to the following convention:
+Files follow this naming pattern:
 
 - `{source_file_name}_level{compression_level}.phi`
 
-For example:
-- `simple_level1.phi`: Expected output for `simple.py` with compression level 1
-- `simple_level5.phi`: Expected output for `simple.py` with compression level 5
+Examples:
+- `simple_level1.phi`: Output for `simple.py` with compression level 1
+- `simple_level5.phi`: Output for `simple.py` with compression level 5
 
-## Adding New Expected Files
-
-When adding new test cases:
+## Adding New Test Cases
 
 1. Create a Python file in the parent directory
-2. Run Phiton conversion on the file with the desired compression level
-3. Save the output to this directory with the appropriate naming convention
-4. Update the tests to use the new expected output file
+2. Run Phiton conversion with the desired compression level
+3. Save output here using the naming convention
+4. Update tests to reference the new file
 
-## Updating Expected Files
+## Updating Existing Files
 
-If the Phiton conversion algorithm changes, the expected output files may need to be updated. To update them:
+Update expected files when the Phiton algorithm changes:
 
-1. Run Phiton conversion on the source files with the desired compression levels
-2. Compare the output with the existing expected files
-3. Update the expected files if the changes are intentional 
+1. Run conversion on source files with current algorithm
+2. Compare new output to existing expected files
+3. Replace expected files if changes are intentional

@@ -1,0 +1,11 @@
+
+/Users/adam/Developer/vcs/github.twardoch/pub/twat-packages/_good/phiton/dev/IDEAS.md
+/Users/adam/Developer/vcs/github.twardoch/pub/twat-packages/_good/phiton/GITHUB_ACTIONS_WORKFLOWS.md
+/Users/adam/Developer/vcs/github.twardoch/pub/twat-packages/_good/phiton/HISTORY.md
+/Users/adam/Developer/vcs/github.twardoch/pub/twat-packages/_good/phiton/INSTALL.md
+/Users/adam/Developer/vcs/github.twardoch/pub/twat-packages/_good/phiton/PROGRESS.md
+/Users/adam/Developer/vcs/github.twardoch/pub/twat-packages/_good/phiton/README.md
+/Users/adam/Developer/vcs/github.twardoch/pub/twat-packages/_good/phiton/SPEC.md
+/Users/adam/Developer/vcs/github.twardoch/pub/twat-packages/_good/phiton/tests/data/expected/README.md
+/Users/adam/Developer/vcs/github.twardoch/pub/twat-packages/_good/phiton/tests/README.md
+

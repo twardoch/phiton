@@ -1,191 +1,181 @@
-# Phiton specification
+# Phiton Specification
 
-Phiton is a symbolic notation for Python that uses Unicode characters to represent Python syntax in a more concise form. It's designed to compress Python code while maintaining readability for those familiar with math or physics notation.
+Phiton is a symbolic notation for Python that uses Unicode characters to represent syntax more concisely. It's designed to compress code while remaining readable to those familiar with mathematical or physics notation.
 
-## 1. Phiton syntax (concise spec)
+## 1. Phiton Syntax (Concise Spec)
 
----
+Phiton compresses Python using Unicode symbols:
 
-Phiton compresses Python into Unicode symbols. Control flow symbols (⇐ for return, ↥ for yield, ⟳ for while, ∀ for for, ⋔ for if, ⋮ for else, ⊘ for pass, ⊠ for break, ⋯ for continue), operators (≔ for =, ≡ for ==, ≠ for !=, ∈ for in, ∉ for not in, ∧ for and, ∨ for or, ¬ for not, ≤ for <=, ≥ for >=), special values (∅ for None, ⊤ for True, ⊥ for False), function definitions (ƒ for def, λ for lambda, Σ for class, ⊡ for async/await), block structure (⟨...⟩ for indented blocks, → for statement separator), common functions (ℓ for len, ℜ for range, ℯ for enumerate, φ for filter, ℤ for zip, ς for sorted, ℛ for reversed), domain prefixes (№ for numpy, ℗ for pandas, χ for sklearn, μ for matplotlib, Ψ for torch, Φ for tensorflow), and literals (#123 for numbers, $text for strings).
+**Control flow:** `⇐` (return), `↥` (yield), `⟳` (while), `∀` (for), `⋔` (if), `⋮` (else), `⊘` (pass), `⊠` (break), `⋯` (continue)
 
----
+**Operators:** `≔` (=), `≡` (==), `≠` (!=), `∈` (in), `∉` (not in), `∧` (and), `∨` (or), `¬` (not), `≤` (<=), `≥` (>=)
 
-## 2. Phiton syntax (detailed spec)
+**Special values:** `∅` (None), `⊤` (True), `⊥` (False)
+
+**Functions:** `ƒ` (def), `λ` (lambda), `Σ` (class), `⊡` (async/await)
+
+**Block structure:** `⟨...⟩` (indented blocks), `→` (statement separator)
+
+**Common functions:** `ℓ` (len), `ℜ` (range), `ℯ` (enumerate), `φ` (filter), `ℤ` (zip), `ς` (sorted), `ℛ` (reversed)
+
+**Domain prefixes:** `№` (numpy), `℗` (pandas), `χ` (sklearn), `μ` (matplotlib), `Ψ` (torch), `Φ` (tensorflow)
+
+**Literals:** `#123` (numbers), `$text` (strings)
+
+## 2. Phiton Syntax (Detailed Spec)
 
 ### 2.1. Introduction
 
-Phiton is a symbolic notation system that represents Python code using Unicode characters, designed to create more concise and visually distinctive code while maintaining readability for those familiar with the notation. It serves as both a compression format and an alternative syntax that can highlight the structural and functional aspects of Python code.
+Phiton represents Python code using Unicode characters. It serves as both a compression format and alternative syntax that emphasizes structural patterns.
 
 ### 2.2. Rationale
 
-The development of Phiton is motivated by several goals:
-
-1. **Code Compression**: Reduce the physical size of Python source code while preserving its semantic meaning
-2. **Visual Distinctiveness**: Make code patterns more immediately recognizable through unique symbols
-3. **Semantic Clarity**: Use mathematical and logical symbols that closely match their programming concepts
-4. **Pattern Recognition**: Standardize common Python idioms into concise symbolic patterns
-5. **Domain-Specific Optimization**: Provide shorthand notation for common library operations
-6. **Flexible Compression**: Support different levels of compression based on needs
+1. **Code Compression**: Reduce source code size while preserving meaning
+2. **Visual Distinctiveness**: Make patterns immediately recognizable
+3. **Semantic Clarity**: Use symbols that match programming concepts
+4. **Pattern Recognition**: Standardize common idioms into concise forms
+5. **Domain-Specific Optimization**: Shorthand for library operations
+6. **Flexible Compression**: Support different levels based on needs
 
 ### 2.3. Core Language Elements
 
 #### 2.3.1. Control Flow
 
-Control flow symbols are chosen to visually represent their function:
-
-| Phiton | Python | Description | Rationale |
-|--------|--------|-------------|-----------|
-| `⇐` | `return` | Return statement | Arrow indicating value return |
-| `↥` | `yield` | Yield statement | Upward arrow suggesting value generation |
-| `↥⋮` | `yield from` | Yield from statement | Yield with continuation |
-| `↑` | `raise` | Raise exception | Upward arrow for exception propagation |
-| `⟳` | `while` | While loop | Circular arrow indicating repetition |
-| `∀` | `for` | For loop | Universal quantifier from mathematics |
-| `⋔` | `if` | If statement | Branch symbol suggesting condition |
-| `⋮` | `else` | Else statement | Vertical dots indicating continuation |
-| `⚟` | `try` | Try statement | Shield symbol for protection |
-| `↦` | `match` | Match statement | Arrow indicating pattern matching |
-| `≐` | `case` | Case statement | Similarity symbol for pattern cases |
-| `⊪` | `assert` | Assert statement | Mathematical assertion symbol |
-| `⊘` | `pass` | Pass statement | Empty set suggesting no operation |
-| `⋯` | `continue` | Continue statement | Horizontal ellipsis for continuation |
-| `⊠` | `break` | Break statement | Crossed box indicating stop |
+| Phiton | Python | Description |
+|--------|--------|-------------|
+| `⇐` | `return` | Return statement |
+| `↥` | `yield` | Yield statement |
+| `↥⋮` | `yield from` | Yield from statement |
+| `↑` | `raise` | Raise exception |
+| `⟳` | `while` | While loop |
+| `∀` | `for` | For loop |
+| `⋔` | `if` | If statement |
+| `⋮` | `else` | Else statement |
+| `<tool_call>` | `try` | Try statement |
+| `↦` | `match` | Match statement |
+| `≐` | `case` | Case statement |
+| `⊪` | `assert` | Assert statement |
+| `⊘` | `pass` | Pass statement |
+| `⋯` | `continue` | Continue statement |
+| `⊠` | `break` | Break statement |
 
 #### 2.3.2. Operators and Assignments
 
-Mathematical and logical symbols are used for operators:
-
-| Phiton | Python | Description | Rationale |
-|--------|--------|-------------|-----------|
-| `≔` | `=` | Assignment | Mathematical definition symbol |
-| `≡` | `==` | Equality | Triple bar for exact equality |
-| `≠` | `!=` | Inequality | Standard mathematical inequality |
-| `∈` | `in` | Membership test | Set membership symbol |
-| `∉` | `not in` | Negative membership | Negated set membership |
-| `∑` | `sum` | Sum function | Summation symbol |
-| `∫` | `map` | Map function | Integration symbol suggesting transformation |
-| `⨁` | `reduce` | Reduce function | Circle plus for accumulation |
-| `△` | `+=` | Add and assign | Triangle suggesting increment |
-| `▽` | `-=` | Subtract and assign | Inverted triangle for decrement |
-| `◊` | `*=` | Multiply and assign | Diamond for multiplication |
-| `◆` | `/=` | Divide and assign | Filled diamond for division |
-| `≝` | `:=` | Walrus operator | Definition symbol |
-| `≤` | `<=` | Less than or equal | Standard mathematical symbol |
-| `≥` | `>=` | Greater than or equal | Standard mathematical symbol |
-| `∧` | `and` | Logical AND | Logical conjunction symbol |
-| `∨` | `or` | Logical OR | Logical disjunction symbol |
-| `¬` | `not` | Logical NOT | Logical negation symbol |
-| `⁇` | `is` | Identity test | Question mark for "is it?" |
-| `⁇¬` | `is not` | Negated identity test | Negated question mark |
+| Phiton | Python | Description |
+|--------|--------|-------------|
+| `≔` | `=` | Assignment |
+| `≡` | `==` | Equality |
+| `≠` | `!=` | Inequality |
+| `∈` | `in` | Membership test |
+| `∉` | `not in` | Negative membership |
+| `∑` | `sum` | Sum function |
+| `∫` | `map` | Map function |
+| `⨁` | `reduce` | Reduce function |
+| `△` | `+=` | Add and assign |
+| `▽` | `-=` | Subtract and assign |
+| `◊` | `*=` | Multiply and assign |
+| `◆` | `/=` | Divide and assign |
+| `≝` | `:=` | Walrus operator |
+| `≤` | `<=` | Less than or equal |
+| `≥` | `>=` | Greater than or equal |
+| `∧` | `and` | Logical AND |
+| `∨` | `or` | Logical OR |
+| `¬` | `not` | Logical NOT |
+| `⁇` | `is` | Identity test |
+| `⁇¬` | `is not` | Negated identity test |
 
 #### 2.3.3. Special Values
 
-Core Python values have distinct symbols:
-
-| Phiton | Python | Description | Rationale |
-|--------|--------|-------------|-----------|
-| `∅` | `None` | None value | Empty set symbol |
-| `⊤` | `True` | Boolean true | Top element symbol |
-| `⊥` | `False` | Boolean false | Bottom element symbol |
+| Phiton | Python | Description |
+|--------|--------|-------------|
+| `∅` | `None` | None value |
+| `⊤` | `True` | Boolean true |
+| `⊥` | `False` | Boolean false |
 
 #### 2.3.4. Functions and Classes
 
-Object-oriented and functional programming constructs:
-
-| Phiton | Python | Description | Rationale |
-|--------|--------|-------------|-----------|
-| `ƒ` | `def` | Function definition | Function symbol from mathematics |
-| `λ` | `lambda` | Lambda function | Lambda calculus symbol |
-| `Σ` | `class` | Class definition | Summation suggesting aggregation |
-| `⊙` | `@property` | Property decorator | Circle dot for property access |
-| `⊡` | `async`/`await` | Async/await | Square suggesting parallel execution |
-| `⊞` | `@staticmethod` | Static method | Plus in box for standalone method |
-| `⊟` | `@classmethod` | Class method | Minus in box for class binding |
-| `⍟` | `@abstractmethod` | Abstract method | Star in circle for interface |
-| `⛋` | `@dataclass` | Dataclass | Box suggesting data structure |
+| Phiton | Python | Description |
+|--------|--------|-------------|
+| `ƒ` | `def` | Function definition |
+| `λ` | `lambda` | Lambda function |
+| `Σ` | `class` | Class definition |
+| `⊙` | `@property` | Property decorator |
+| `⊡` | `async`/`await` | Async/await |
+| `⊞` | `@staticmethod` | Static method |
+| `⊟` | `@classmethod` | Class method |
+| `⍟` | `@abstractmethod` | Abstract method |
+| `⛋` | `@dataclass` | Dataclass |
 
 #### 2.3.5. Built-in Functions
 
-Common Python built-ins have mathematical equivalents:
-
-| Phiton | Python | Description | Rationale |
-|--------|--------|-------------|-----------|
-| `ℓ` | `len` | Length function | Script l for length |
-| `ℜ` | `range` | Range function | Real numbers symbol |
-| `ℯ` | `enumerate` | Enumerate function | Mathematical e |
-| `φ` | `filter` | Filter function | Phi for filtering |
-| `ℤ` | `zip` | Zip function | Integers symbol |
-| `ς` | `sorted` | Sorted function | Sigma for sorting |
-| `ℛ` | `reversed` | Reversed function | Script R |
-| `∃` | `any` | Any function | Existential quantifier |
-| `∀` | `all` | All function | Universal quantifier |
-| `↓` | `min` | Min function | Down arrow for minimum |
-| `↑` | `max` | Max function | Up arrow for maximum |
-| `○` | `round` | Round function | Circle for rounding |
-| `∥` | `abs` | Absolute value | Parallel lines |
-| `^` | `pow` | Power function | Caret for exponentiation |
-| `Π` | `print` | Print function | Capital Pi for "output" |
+| Phiton | Python | Description |
+|--------|--------|-------------|
+| `ℓ` | `len` | Length function |
+| `ℜ` | `range` | Range function |
+| `ℯ` | `enumerate` | Enumerate function |
+| `φ` | `filter` | Filter function |
+| `ℤ` | `zip` | Zip function |
+| `ς` | `sorted` | Sorted function |
+| `ℛ` | `reversed` | Reversed function |
+| `∃` | `any` | Any function |
+| `∀` | `all` | All function |
+| `↓` | `min` | Min function |
+| `↑` | `max` | Max function |
+| `○` | `round` | Round function |
+| `∥` | `abs` | Absolute value |
+| `^` | `pow` | Power function |
+| `Π` | `print` | Print function |
 
 #### 2.3.6. Object Operations
 
-Object manipulation symbols:
-
-| Phiton | Python | Description | Rationale |
-|--------|--------|-------------|-----------|
-| `∋` | `isinstance` | Type check | Reverse membership |
-| `∌` | `hasattr` | Attribute check | Negated membership |
-| `⊳` | `getattr` | Get attribute | Right triangle |
-| `⊲` | `setattr` | Set attribute | Left triangle |
-| `⊗` | `delattr` | Delete attribute | Cross product |
-| `↰` | `super` | Super function | Up-left arrow |
-| `→` | `next` | Next function | Right arrow |
-| `⟲` | `iter` | Iterator function | Circular arrow |
-| `·` | `.` | Attribute access | Center dot |
+| Phiton | Python | Description |
+|--------|--------|-------------|
+| `∋` | `isinstance` | Type check |
+| `∌` | `hasattr` | Attribute check |
+| `⊳` | `getattr` | Get attribute |
+| `⊲` | `setattr` | Set attribute |
+| `⊗` | `delattr` | Delete attribute |
+| `↰` | `super` | Super function |
+| `→` | `next` | Next function |
+| `⟲` | `iter` | Iterator function |
+| `·` | `.` | Attribute access |
 
 #### 2.3.7. Block Structure
 
-Code structure symbols:
-
-| Phiton | Python | Description | Rationale |
-|--------|--------|-------------|-----------|
-| `⟨...⟩` | Indented block | Code block | Angle brackets |
-| `→` | Newline | Statement separator | Right arrow |
-| `⦂` | `:` | Type annotation | Double colon |
+| Phiton | Python | Description |
+|--------|--------|-------------|
+| `⟨...⟩` | Indented block | Code block |
+| `→` | Newline | Statement separator |
+| `⦂` | `:` | Type annotation |
 
 #### 2.3.8. Literals and Containers
 
-Data structure notation:
-
-| Phiton | Python | Description | Rationale |
-|--------|--------|-------------|-----------|
-| `#123` | `123` | Numeric literal | Hash prefix |
-| `$text` | `"text"` | String literal | Dollar prefix |
-| `⟦...⟧` | `{...}` | Dict/set comprehension | Double brackets |
-| `⟬...⟭` | `[...]` | List comprehension | Mathematical brackets |
-| `⦅...⦆` | `(...)` | Tuple | Parentheses |
-| `⟮...⟯` | `(...)` | Grouping | Curved brackets |
+| Phiton | Python | Description |
+|--------|--------|-------------|
+| `#123` | `123` | Numeric literal |
+| `$text` | `"text"` | String literal |
+| `⟦...⟧` | `{...}` | Dict/set comprehension |
+| `⟬...⟭` | `[...]` | List comprehension |
+| `⦅...⦆` | `(...)` | Tuple |
+| `⟮...⟯` | `(...)` | Grouping |
 
 #### 2.3.9. String Operations
 
-String manipulation symbols:
-
-| Phiton | Python | Description | Rationale |
-|--------|--------|-------------|-----------|
-| `⌿` | `strip` | Strip whitespace | Slash suggesting removal |
-| `⇌` | `replace` | Replace substring | Reversing arrow |
-| `⨍` | `format` | Format string | Function symbol |
-| `「...」` | `f'...'` | F-string | Japanese quotes |
+| Phiton | Python | Description |
+|--------|--------|-------------|
+| `⌿` | `strip` | Strip whitespace |
+| `⇌` | `replace` | Replace substring |
+| `⨍` | `format` | Format string |
+| `「...」` | `f'...'` | F-string |
 
 #### 2.3.10. Collection Operations
 
-Collection manipulation:
-
-| Phiton | Python | Description | Rationale |
-|--------|--------|-------------|-----------|
-| `⊕` | `append` | Append to list | Plus in circle |
-| `⊖` | `pop` | Pop from list | Minus in circle |
-| `⊚` | `values` | Dictionary values | Circle |
-| `⊛` | `items` | Dictionary items | Star in circle |
+| Phiton | Python | Description |
+|--------|--------|-------------|
+| `⊕` | `append` | Append to list |
+| `⊖` | `pop` | Pop from list |
+| `⊚` | `values` | Dictionary values |
+| `⊛` | `items` | Dictionary items |
 
 ### 2.4. Domain-Specific Prefixes
 
@@ -224,8 +214,6 @@ Collection manipulation:
 
 ### 2.5. Pattern Replacements
 
-Phiton includes many pattern replacements for common Python idioms:
-
 | Python Pattern | Phiton Equivalent |
 |----------------|-------------------|
 | `if x is not None` | `⋔x≠∅` |
@@ -235,7 +223,7 @@ Phiton includes many pattern replacements for common Python idioms:
 | `return [x for x in xs if p(x)]` | `⇐[x∀x∈xs⋔p(x)]` |
 | `lambda x: f(x)` | `λx⇒f(x)` |
 | `with open(f) as h` | `⊢⊣⊗(f)⇒h` |
-| `try: x\nexcept E: y` | `⚟⟨x⟩⋔E⟨y⟩` |
+| `try: x\nexcept E: y` | `<tool_call>⟨x⟩⋔E⟨y⟩` |
 | `if p: return x` | `⋔p⇐x` |
 | `if not p: return` | `⋔¬p⇐` |
 | `x if p else y` | `p?x:y` |
@@ -245,8 +233,6 @@ Phiton includes many pattern replacements for common Python idioms:
 | `any(p(x) for x in xs)` | `∃(p,xs)` |
 
 ### 2.6. Advanced Patterns
-
-Phiton includes advanced pattern replacements for common Python idioms:
 
 | Python Pattern | Phiton Equivalent |
 |----------------|-------------------|
@@ -259,7 +245,7 @@ Phiton includes advanced pattern replacements for common Python idioms:
 | `next(x for x in X if P)` | `→(x∀x∈X⋔P)` |
 | `sorted(X, key=lambda x: x.Y)` | `ς(X,λx:x·Y)` |
 | `if x is not None: return x\nelse: return y` | `⇐x≢∅?x:y` |
-| `try:\n    x\nexcept E as e:\n    y` | `⚟⟨x⟩⋔E⇒e⟨y⟩` |
+| `try:\n    x\nexcept E as e:\n    y` | `</tool_call>⟨x⟩⋔E⇒e⟨y⟩` |
 | `async with aiohttp.ClientSession() as session:` | `⊢⊣⊡η·S()⇒s⟨` |
 | `await asyncio.gather(*tasks)` | `⊡γ·G(◇t)` |
 | `'.'.join(x for x in X)` | `·⊕(X)` |
@@ -276,17 +262,15 @@ Phiton includes advanced pattern replacements for common Python idioms:
 
 ### 2.7. Compression Levels
 
-Phiton supports different compression levels:
-
 1. **Level 1**: Basic conversion with readable symbols and preserved structure
 2. **Level 2**: More symbol substitutions but maintain readability
 3. **Level 3**: Full symbol substitution with some structure preservation
 4. **Level 4**: Aggressive symbol substitution and minimal structure
-5. **Level 5**: Maximum compression with shortest possible representation
+5. **Level 5**: Maximum compression with shortest representation
 
 ### 2.8. Conversion Process
 
-#### 2.8.1. 6.1 Python to Phiton (`phitonize`)
+#### Python to Phiton (`phitonize`)
 
 1. Parse Python code into AST
 2. Traverse AST and convert each node to Phiton notation
@@ -295,7 +279,7 @@ Phiton supports different compression levels:
 5. Generate symbol table for frequently used expressions
 6. Optimize imports and structure
 
-#### 2.8.2. 6.2 Phiton to Python (`dephitonize`)
+#### Phiton to Python (`dephitonize`)
 
 1. Apply symbol replacements to convert Phiton to Python
 2. Replace numeric and string literals
@@ -305,7 +289,7 @@ Phiton supports different compression levels:
 
 ### 2.9. Examples
 
-#### 2.9.1. 7.1 Factorial Function
+#### Factorial Function
 
 **Python:**
 ```python
@@ -321,7 +305,7 @@ def factorial(n):
 ƒfactorialn⟨⋔n≤#1⟨⇐#1⟩⋮⇐n*factorialn-#1⟩
 ```
 
-#### 2.9.2. 7.2 List Comprehension
+#### List Comprehension
 
 **Python:**
 ```python
@@ -333,7 +317,7 @@ def factorial(n):
 [x*#2∀x∈ℜ(#10)⋔x%#2≡#0]
 ```
 
-#### 2.9.3. 7.3 Class Definition
+#### Class Definition
 
 **Python:**
 ```python
@@ -353,9 +337,9 @@ class Person:
 
 ### 2.10. Implementation Notes
 
-1. **AST-based Conversion**: Both phitonize and dephitonize use Python's AST for reliable code transformation
+1. **AST-based Conversion**: Both phitonize and dephitonize use Python's AST for reliable transformation
 2. **Pattern Priority**: More specific patterns take precedence over general ones
-3. **Symbol Table**: Frequently used expressions are cached in a symbol table
+3. **Symbol Table**: Frequently used expressions are cached
 4. **Scope Awareness**: Symbol substitutions respect Python scoping rules
 5. **Validation**: Generated code is validated through AST parsing
 6. **Error Handling**: Conversion errors provide detailed feedback
@@ -363,10 +347,10 @@ class Person:
 
 ### 2.11. Best Practices
 
-1. Use compression level 1-2 for code that needs to be read frequently
-2. Use level 3 for a balance of readability and compression
-3. Reserve levels 4-5 for maximum compression when readability is less important
-4. Document the compression level used in project metadata
-5. Maintain a style guide for consistent Phiton usage in projects
-6. Consider using syntax highlighting for Phiton code
-7. Include original Python code in comments for complex transformations
+1. Use compression level 1-2 for frequently read code
+2. Use level 3 for balance of readability and compression
+3. Reserve levels 4-5 for maximum compression when readability matters less
+4. Document compression level in project metadata
+5. Maintain style guide for consistent usage
+6. Consider syntax highlighting for Phiton code
+7. Include original Python in comments for complex transformations

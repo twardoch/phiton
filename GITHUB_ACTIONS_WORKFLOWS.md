@@ -1,6 +1,6 @@
 # GitHub Actions Workflows
 
-Since the GitHub App doesn't have workflows permission, here are the enhanced workflow files that should be manually applied:
+The GitHub App lacks workflows permission, so these enhanced workflow files must be applied manually.
 
 ## Enhanced CI Workflow (`.github/workflows/push.yml`)
 
@@ -94,7 +94,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Needed for proper versioning
+          fetch-depth: 0
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -147,17 +147,17 @@ jobs:
           python-version: ${{ matrix.python-version }}
           enable-cache: true
 
-      - name: Install dependencies including PyInstaller
+      - name: Install dependencies
         run: |
           uv sync
           uv add pyinstaller
 
-      - name: Build binary with PyInstaller
+      - name: Build binary
         run: |
           uv run pyinstaller --onefile --name phiton-${{ matrix.os }} --add-data "src/phiton:phiton" src/phiton/__main__.py
         shell: bash
 
-      - name: Test binary (Unix)
+      - name: Test binary
         if: matrix.os != 'windows-latest'
         run: |
           ./dist/phiton-${{ matrix.os }} --version
@@ -167,7 +167,7 @@ jobs:
         run: |
           ./dist/phiton-${{ matrix.os }}.exe --version
 
-      - name: Upload binary artifacts
+      - name: Upload binary
         uses: actions/upload-artifact@v4
         with:
           name: phiton-binary-${{ matrix.os }}
@@ -213,11 +213,10 @@ jobs:
           python-version: ${{ matrix.python-version }}
           enable-cache: true
 
-      - name: Install test dependencies
-        run: |
-          uv sync
+      - name: Install dependencies
+        run: uv sync
 
-      - name: Run tests with Pytest
+      - name: Run tests
         run: uv run pytest -n auto --maxfail=1 --disable-warnings tests/
 
   build-distribution:
@@ -248,13 +247,13 @@ jobs:
       - name: Build distributions
         run: uv run python -m build --outdir dist
 
-      - name: Verify distribution files
+      - name: Verify files
         run: |
           ls -la dist/
           test -n "$(find dist -name '*.whl')" || (echo "Wheel file missing" && exit 1)
           test -n "$(find dist -name '*.tar.gz')" || (echo "Source distribution missing" && exit 1)
 
-      - name: Upload distribution artifacts
+      - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
           name: python-distributions
@@ -286,17 +285,17 @@ jobs:
           python-version: ${{ matrix.python-version }}
           enable-cache: true
 
-      - name: Install dependencies including PyInstaller
+      - name: Install dependencies
         run: |
           uv sync
           uv add pyinstaller
 
-      - name: Build binary with PyInstaller
+      - name: Build binary
         run: |
           uv run pyinstaller --onefile --name phiton-${{ matrix.os }} --add-data "src/phiton:phiton" src/phiton/__main__.py
         shell: bash
 
-      - name: Test binary (Unix)
+      - name: Test binary
         if: matrix.os != 'windows-latest'
         run: |
           ./dist/phiton-${{ matrix.os }} --version
@@ -306,7 +305,7 @@ jobs:
         run: |
           ./dist/phiton-${{ matrix.os }}.exe --version
 
-      - name: Upload binary artifacts
+      - name: Upload binary
         uses: actions/upload-artifact@v4
         with:
           name: phiton-binary-${{ matrix.os }}
@@ -325,12 +324,12 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Download all artifacts
+      - name: Download artifacts
         uses: actions/download-artifact@v4
         with:
           path: artifacts/
 
-      - name: Organize artifacts
+      - name: Organize assets
         run: |
           mkdir -p release-assets
           cp -r artifacts/python-distributions/* release-assets/ || true
@@ -358,47 +357,46 @@ jobs:
             uv pip install phiton
             ```
 
-            ### Using precompiled binaries
-            Download the appropriate binary for your platform from the assets below:
-            - `phiton-ubuntu-latest` - Linux binary
-            - `phiton-windows-latest.exe` - Windows binary  
-            - `phiton-macos-latest` - macOS binary
+            ### Using binaries
+            Download the appropriate binary:
+            - `phiton-ubuntu-latest` - Linux
+            - `phiton-windows-latest.exe` - Windows  
+            - `phiton-macos-latest` - macOS
 
-            Make the binary executable and run:
+            Make executable and run:
             ```bash
             chmod +x phiton-ubuntu-latest  # Linux/macOS only
             ./phiton-ubuntu-latest --help
             ```
 
-            ## Changes in this release
-            See the automatically generated release notes below.
+            ## Changes
+            See automatically generated notes below.
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 ## Manual Application Instructions
 
-To apply these workflow enhancements:
+1. **Copy the CI workflow**: Replace `.github/workflows/push.yml` contents
+2. **Copy the Release workflow**: Replace `.github/workflows/release.yml` contents
 
-1. **Copy the CI workflow**: Replace the contents of `.github/workflows/push.yml` with the enhanced CI workflow above
-2. **Copy the Release workflow**: Replace the contents of `.github/workflows/release.yml` with the enhanced release workflow above
+## Key Improvements
 
-The key improvements include:
-- ✅ **Multiplatform testing** - Tests on Ubuntu, Windows, and macOS
-- ✅ **Binary compilation** - PyInstaller-based binary builds for all platforms
-- ✅ **Artifact management** - Comprehensive artifact collection and release
-- ✅ **Enhanced releases** - Rich release notes with installation instructions
+- Multiplatform testing across Ubuntu, Windows, and macOS
+- Binary compilation using PyInstaller for all platforms
+- Artifact management with comprehensive collection
+- Rich release notes including installation instructions
 
 ## Testing the Workflows
 
-After applying the workflows:
+After applying:
 
-1. **Test CI**: Push changes to a branch and create a PR
-2. **Test Release**: Create a git tag: `git tag v1.0.0 && git push origin v1.0.0`
+1. **Test CI**: Push changes to a branch or create a PR
+2. **Test Release**: Create and push a git tag (`git tag v1.0.0 && git push origin v1.0.0`)
 3. **Verify Artifacts**: Check the release page for binary downloads
 
-The workflows will automatically:
+Workflows automatically:
 - Run tests on all platforms
 - Build Python distributions
 - Create platform-specific binaries
-- Upload everything to PyPI and GitHub releases
+- Upload to PyPI and GitHub releases

@@ -1,6 +1,6 @@
 # Installation Guide
 
-This guide covers various ways to install Phiton on your system.
+This guide covers the different ways to install Phiton.
 
 ## Quick Installation
 
@@ -10,7 +10,7 @@ This guide covers various ways to install Phiton on your system.
 curl -sSf https://raw.githubusercontent.com/twardoch/phiton/main/install.sh | bash
 ```
 
-This will automatically detect your platform and install the latest binary to `~/.local/bin`.
+Installs the latest binary to `~/.local/bin` and detects your platform automatically.
 
 ### Using pip/uv
 
@@ -18,19 +18,19 @@ This will automatically detect your platform and install the latest binary to `~
 # Using pip
 pip install phiton
 
-# Using uv (recommended)
+# Using uv (faster, preferred)
 uv pip install phiton
 ```
 
 ### Using precompiled binaries
 
-Download the appropriate binary for your platform from the [latest release](https://github.com/twardoch/phiton/releases/latest):
+Download the correct binary from the [latest release](https://github.com/twardoch/phiton/releases/latest):
 
 - **Linux**: `phiton-ubuntu-latest`
 - **Windows**: `phiton-windows-latest.exe`
 - **macOS**: `phiton-macos-latest`
 
-Make the binary executable and run:
+Make it executable and test:
 
 ```bash
 # Linux/macOS
@@ -45,16 +45,16 @@ phiton-windows-latest.exe --help
 
 ### 1. Install Script Options
 
-The install script supports several options:
+The script accepts these arguments:
 
 ```bash
-# Install to specific directory
+# Install to a specific directory
 curl -sSf https://raw.githubusercontent.com/twardoch/phiton/main/install.sh | bash -s -- --dir /usr/local/bin
 
-# Install specific version
+# Install a specific version
 curl -sSf https://raw.githubusercontent.com/twardoch/phiton/main/install.sh | bash -s -- --version v1.0.0
 
-# Don't add to PATH
+# Skip PATH modification
 curl -sSf https://raw.githubusercontent.com/twardoch/phiton/main/install.sh | bash -s -- --no-path
 
 # Show help
@@ -63,16 +63,16 @@ curl -sSf https://raw.githubusercontent.com/twardoch/phiton/main/install.sh | ba
 
 ### 2. Manual Binary Installation
 
-1. Go to the [releases page](https://github.com/twardoch/phiton/releases)
-2. Download the binary for your platform
+1. Visit the [releases page](https://github.com/twardoch/phiton/releases)
+2. Download the binary for your system
 3. Move it to a directory in your PATH:
 
 ```bash
-# Linux/macOS
+# Linux/macOS system-wide
 sudo mv phiton-ubuntu-latest /usr/local/bin/phiton
 sudo chmod +x /usr/local/bin/phiton
 
-# Or to user directory
+# Or user-only
 mkdir -p ~/.local/bin
 mv phiton-ubuntu-latest ~/.local/bin/phiton
 chmod +x ~/.local/bin/phiton
@@ -82,22 +82,22 @@ source ~/.bashrc
 
 ### 3. Development Installation
 
-For development or to get the latest features:
+To work on Phiton or test unreleased features:
 
 ```bash
-# Clone the repository
+# Clone the repo
 git clone https://github.com/twardoch/phiton.git
 cd phiton
 
-# Install UV if not already installed
+# Install UV if missing
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
-# Create virtual environment and install
+# Set up virtual environment and dependencies
 uv venv --python 3.12
 source .venv/bin/activate
 uv sync
 
-# Install in development mode
+# Install in editable mode
 uv pip install -e .
 
 # Run tests
@@ -110,16 +110,16 @@ uv pip install -e .
 ### 4. Docker Installation
 
 ```bash
-# Build Docker image
+# Build the image
 docker build -t phiton .
 
-# Run Phiton in container
+# Run Phiton on a file
 docker run --rm -v $(pwd):/workspace phiton example.py
 ```
 
 ## Verification
 
-After installation, verify that Phiton is working correctly:
+Check that Phiton works after installation:
 
 ```bash
 # Check version
@@ -128,7 +128,7 @@ phiton --version
 # Test basic functionality
 echo "def hello(): print('Hello, world!')" | phiton
 
-# Get help
+# Show help
 phiton --help
 ```
 
@@ -136,52 +136,54 @@ phiton --help
 
 ### Linux
 
-The binary is built on Ubuntu and should work on most Linux distributions. If you encounter issues:
+Built on Ubuntu. Should work on most modern Linux systems.  
+If it doesn't:
 
-1. Ensure glibc is available (most modern distributions include it)
-2. Try installing from source using pip/uv
-3. Check that the binary has execute permissions
+1. Confirm glibc is installed
+2. Try installing with pip/uv instead
+3. Check execute permissions
 
 ### macOS
 
-The binary is built on the latest macOS runner. For older macOS versions:
+Built for recent macOS versions.  
+For older systems:
 
-1. Try installing from source using pip/uv
-2. Ensure you have the latest Xcode command line tools
-3. You may need to allow the binary in System Preferences > Security
+1. Install via pip/uv
+2. Update Xcode command line tools
+3. Allow the binary in System Preferences > Security if needed
 
 ### Windows
 
-The binary is built for Windows 10/11. For older Windows versions:
+Built for Windows 10/11.  
+Older versions might need:
 
-1. Try installing from source using pip/uv
-2. Ensure you have the latest Microsoft Visual C++ Redistributable
-3. Run from Command Prompt or PowerShell
+1. Installation via pip/uv
+2. Latest Microsoft Visual C++ Redistributable
+3. Running from Command Prompt or PowerShell
 
 ## Troubleshooting
 
 ### Common Issues
 
-1. **Command not found**: Make sure the install directory is in your PATH
-2. **Permission denied**: Ensure the binary has execute permissions
+1. **Command not found**: Verify the install directory is in your PATH
+2. **Permission denied**: Check execute permissions on the binary
 3. **Version mismatch**: Clear pip cache and reinstall
 
 ### Getting Help
 
-- Check the [troubleshooting guide](https://github.com/twardoch/phiton/wiki/Troubleshooting)
-- Open an issue on [GitHub](https://github.com/twardoch/phiton/issues)
-- Ask questions in [Discussions](https://github.com/twardoch/phiton/discussions)
+- Read the [troubleshooting guide](https://github.com/twardoch/phiton/wiki/Troubleshooting)
+- File an issue on [GitHub](https://github.com/twardoch/phiton/issues)
+- Ask in [Discussions](https://github.com/twardoch/phiton/discussions)
 
 ## Uninstall
 
 ### Binary Installation
 
 ```bash
-# Remove binary
-rm ~/.local/bin/phiton  # or wherever you installed it
+# Remove the binary
+rm ~/.local/bin/phiton  # or your custom install path
 
-# Remove from PATH (edit your shell rc file)
-# Remove the export PATH line you added
+# Remove PATH modifications (edit your shell config file if needed)
 ```
 
 ### Pip Installation
