@@ -13,6 +13,10 @@ def factorial(n: int) -> int:
 ƒ factorial(n⦂int)→int⟨⋔n≤#1⟨⇐#1⟩→⇐n*factorial(n-#1)⟩
 ```
 
+## Visual
+
+![A bulky spotted python on the left compresses, via an arrow, into a single elegant thin curl on the right](docs/assets/icon.png)
+
 ## Who it's for
 
 - Developers needing compact code for token-limited LLM context windows
@@ -124,7 +128,16 @@ All flags (`--comments`, `--type-hints`, `--symbols`, `--minify`) work independe
 3. Rebuild indentation from `⟨…⟩` and `→`
 4. Clean up spacing with regex passes
 
-Round-trip fidelity: higher compression levels produce functionally equivalent but not byte-identical Python.
+## Limitations
+
+Phiton is a compression aid, not a lossless codec. Know the edges before you rely on it:
+
+- **Statement-level round-trip is faithful.** Assignments and expressions compress and decompress back to AST-equivalent Python at every level. This is covered by tests.
+- **Control-flow blocks do not yet round-trip cleanly.** Rebuilding indentation from `⟨…⟩`/`→` is a heuristic. `if`/`for`/`while`/`def` bodies can come back as invalid or subtly altered Python. Treat decompression of block-heavy code as a draft to review, not a drop-in restore. (Tracked in `TODO.md`.)
+- **Substring substitution can bruise identifiers.** At levels 3–5 a name that contains a mapped token — `print` contains `int` — may be partially rewritten. Compression stays useful for LLM context; exact recovery is not guaranteed.
+- **Comments are dropped** unless you keep `--comments` and stay at a low level.
+
+The tool earns its keep in one direction: squeeze Python down so more of it fits in a context window. Round-tripping arbitrary programs byte-for-byte is out of scope for now.
 
 ## Configuration
 

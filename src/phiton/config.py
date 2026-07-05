@@ -19,7 +19,7 @@ class ConversionConfig:
     symbols: bool = True
     level: int = 5
 
-    def __post_init__(self):
+    def __post_init__(self) -> None:
         """Validate the configuration parameters after initialization."""
         # Ensure level is between 1 and 5
         if self.level < 1 or self.level > 5:

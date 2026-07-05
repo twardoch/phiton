@@ -1,0 +1,29 @@
+title: phiton
+description: >-
+  Compress Python source into Unicode symbolic notation and back, to fit more
+  code into an LLM context window.
+
+remote_theme: just-the-docs/just-the-docs
+
+url: https://twardoch.github.io
+baseurl: /phiton
+
+search_enabled: true
+nav_sort: case_insensitive
+
+footer_content: >-
+  Copyright &copy; 2024&#8211;2026 Adam Twardoch.
+  Distributed under the
+  <a href="https://github.com/twardoch/phiton/blob/main/LICENSE">MIT License</a>.
+
+# GitHub link in the top-right corner
+gh_edit_link: true
+gh_edit_link_text: Edit this page on GitHub
+gh_edit_repository: https://github.com/twardoch/phiton
+gh_edit_branch: main
+gh_edit_source: docs
+gh_edit_view_mode: edit
+
+plugins:
+  - jekyll-remote-theme
+  - jekyll-seo-tag

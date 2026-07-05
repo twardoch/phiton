@@ -147,7 +147,9 @@ def phitonize_python(source_code: str, config: ConversionConfig | None = None) -
                     expr_freq[expr] = expr_freq.get(expr, 0) + 1
             except Exception as e:
                 # Skip if unparsing fails, but log it for debugging
-                logger.trace(f"Could not unparse node for frequency tracking: {node} - {e}")
+                logger.trace(
+                    f"Could not unparse node for frequency tracking: {node} - {e}"
+                )
 
         if isinstance(node, ast.FunctionDef):
             scope_stack.append({})  # New scope
@@ -218,9 +220,9 @@ def phitonize_python(source_code: str, config: ConversionConfig | None = None) -
 
         elif isinstance(node, ast.Call):
             func = phitonize_node(node.func)
-            args = [phitonize_node(arg) for arg in node.args]
+            arg_strs = [phitonize_node(arg) for arg in node.args]
             kwargs = [f"{kw.arg}={phitonize_node(kw.value)}" for kw in node.keywords]
-            all_args = ",".join(filter(None, [",".join(args), ",".join(kwargs)]))
+            all_args = ",".join(filter(None, [",".join(arg_strs), ",".join(kwargs)]))
 
             # Handle domain-specific library calls at higher levels
             if config.level >= 3:
@@ -323,11 +325,11 @@ def phitonize_python(source_code: str, config: ConversionConfig | None = None) -
             return f"({','.join(elements)})"
 
         elif isinstance(node, ast.Dict):
-            items = [
+            dict_items = [
                 f"{phitonize_node(k)}:{phitonize_node(v)}"
                 for k, v in zip(node.keys, node.values, strict=False)
             ]
-            return f"{{{','.join(items)}}}"
+            return f"{{{','.join(dict_items)}}}"
 
         elif isinstance(node, ast.Set):
             elements = [phitonize_node(elt) for elt in node.elts]
@@ -365,13 +367,13 @@ def phitonize_python(source_code: str, config: ConversionConfig | None = None) -
             return f"⦃{elt} {' '.join(generators)}⦄"
 
         elif isinstance(node, ast.JoinedStr):
-            values = []
-            for value in node.values:
-                if isinstance(value, ast.FormattedValue):
-                    values.append(f"{{{phitonize_node(value.value)}}}")
-                elif isinstance(value, ast.Constant):
-                    values.append(str(value.value))
-            return f"「{''.join(values)}」"
+            fstring_parts: list[str] = []
+            for part_node in node.values:
+                if isinstance(part_node, ast.FormattedValue):
+                    fstring_parts.append(f"{{{phitonize_node(part_node.value)}}}")
+                elif isinstance(part_node, ast.Constant):
+                    fstring_parts.append(str(part_node.value))
+            return f"「{''.join(fstring_parts)}」"
 
         elif isinstance(node, ast.NamedExpr):
             target = phitonize_node(node.target)
@@ -508,7 +510,9 @@ def phitonize_python(source_code: str, config: ConversionConfig | None = None) -
             else:
                 statements.append(stmt)
 
-        return "→".join(optimize_expression(s) for s in statements if s) # ensure no empty strings
+        return "→".join(
+            optimize_expression(s) for s in statements if s
+        )  # ensure no empty strings
 
     def phitonize_operator(op: ast.operator | ast.cmpop | ast.boolop) -> str:
         """Convert Python operator to Phiton symbol."""
@@ -539,9 +543,11 @@ def phitonize_python(source_code: str, config: ConversionConfig | None = None) -
         elif name == "NotIn":
             return "∉"
         elif name == "Is":
-            return PYTHON_TO_PHITON.get("is", "is") # Use symbol if defined
+            return PYTHON_TO_PHITON.get("is", "is")  # Use symbol if defined
         elif name == "IsNot":
-            return PYTHON_TO_PHITON.get("is not", "is not") # Use symbol if defined (needs "is not": "⁇¬")
+            return PYTHON_TO_PHITON.get(
+                "is not", "is not"
+            )  # Use symbol if defined (needs "is not": "⁇¬")
         elif name == "And":
             return "∧"
         elif name == "Or":

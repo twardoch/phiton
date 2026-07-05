@@ -32,13 +32,13 @@ def optimize_imports(tree: ast.AST) -> list[str]:
                 imports[f"{module}.{alias.name}"] = alias.asname or alias.name
 
     # Group imports by domain
-    domain_imports = {}
-    for imp, alias in imports.items():
+    domain_imports: dict[str, list[tuple[str, str]]] = {}
+    for imp, imp_alias in imports.items():
         for domain in DOMAIN_PREFIXES:
             if imp.startswith(domain):
                 if domain not in domain_imports:
                     domain_imports[domain] = []
-                domain_imports[domain].append((imp, alias))
+                domain_imports[domain].append((imp, imp_alias))
                 break
 
     # Generate optimized import statements
@@ -54,11 +54,11 @@ def optimize_imports(tree: ast.AST) -> list[str]:
             ]
             result.append(f"from {domain} import {', '.join(names)}")
         else:
-            imp, alias = imps[0]
-            if imp == alias:
+            imp, imp_alias = imps[0]
+            if imp == imp_alias:
                 result.append(f"import {imp}")
             else:
-                result.append(f"import {imp} as {alias}")
+                result.append(f"import {imp} as {imp_alias}")
 
     return result
 

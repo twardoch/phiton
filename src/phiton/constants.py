@@ -83,7 +83,7 @@ PYTHON_TO_PHITON = {
     # "next": "→", # → is a structural token for newline, not for next()
     "iter": "⟲",
     "is": "⁇",
-    "is not": "⁇¬", # For is not
+    "is not": "⁇¬",  # For is not
     "print": "Π",
 }
 

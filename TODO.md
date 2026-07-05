@@ -1,5 +1,23 @@
 # Phiton Streamlining TODO for MVP (v1.0)
 
+## Known limitations discovered during 2026-07-05 modernization
+
+- [ ] **Robust block round-trip.** `dephitonize._reconstruct_blocks_and_lines`
+  rebuilds indentation from `⟨…⟩`/`→` with regex heuristics; `if`/`for`/`while`/`def`
+  bodies do not reliably decompress to valid Python. Replace the heuristic with a
+  real structural parser. (Currently covered by `xfail` tests in `test_dephitonizer.py`.)
+- [ ] **Word-boundary-safe substitution.** `COMMON_SUBEXPRESSIONS` does substring
+  replacement, so `int(` inside `print(` corrupts identifiers at levels 3–5. Make
+  substitution token-aware.
+- [ ] **`ast.Expr` statements.** Bare expression statements (e.g. `print(x)`) fall
+  through to `ast.unparse` instead of being symbol-mapped; handle `ast.Expr` in
+  `phitonize_node` so call-name mappings apply.
+- [ ] **Level-1 readability.** `optimize_final` collapses all whitespace even at
+  level 1, contradicting the "maximum readability" description. Preserve structure
+  at low levels.
+
+
+
 ## Phase 1: Code Structure and Responsibility Clarification
 
 - [ ] **Centralize Core Conversion Logic:**

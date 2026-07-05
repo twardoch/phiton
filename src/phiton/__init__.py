@@ -33,8 +33,10 @@ __all__ = [
     "ConversionConfig",
     "__version__",
     "calculate_stats",
+    "dephitonize",
     "dephitonize_phiton",
     "optimize_final",
+    "phitonize",
     "phitonize_python",
     "version",
 ]
