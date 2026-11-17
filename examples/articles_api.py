@@ -61,11 +61,11 @@ class ArticlesApi:
         self,
         article_id: Annotated[StrictStr, Field(description="The ID of the article")],
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -125,11 +125,11 @@ class ArticlesApi:
         self,
         article_id: Annotated[StrictStr, Field(description="The ID of the article")],
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -189,11 +189,11 @@ class ArticlesApi:
         self,
         article_id: Annotated[StrictStr, Field(description="The ID of the article")],
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -303,11 +303,11 @@ class ArticlesApi:
         article_id: Annotated[StrictStr, Field(description="The ID of the article")],
         fork_article_version_request: ForkArticleVersionRequest | None = None,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -371,11 +371,11 @@ class ArticlesApi:
         article_id: Annotated[StrictStr, Field(description="The ID of the article")],
         fork_article_version_request: ForkArticleVersionRequest | None = None,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -439,11 +439,11 @@ class ArticlesApi:
         article_id: Annotated[StrictStr, Field(description="The ID of the article")],
         fork_article_version_request: ForkArticleVersionRequest | None = None,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -594,11 +594,11 @@ class ArticlesApi:
             ),
         ] = None,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -691,11 +691,11 @@ class ArticlesApi:
             ),
         ] = None,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -788,11 +788,11 @@ class ArticlesApi:
             ),
         ] = None,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -932,11 +932,11 @@ class ArticlesApi:
         ],
         publish_article_request: PublishArticleRequest | None = None,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -1006,11 +1006,11 @@ class ArticlesApi:
         ],
         publish_article_request: PublishArticleRequest | None = None,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -1080,11 +1080,11 @@ class ArticlesApi:
         ],
         publish_article_request: PublishArticleRequest | None = None,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -1224,11 +1224,11 @@ class ArticlesApi:
         ],
         update_article_request: UpdateArticleRequest | None = None,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -1298,11 +1298,11 @@ class ArticlesApi:
         ],
         update_article_request: UpdateArticleRequest | None = None,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -1372,11 +1372,11 @@ class ArticlesApi:
         ],
         update_article_request: UpdateArticleRequest | None = None,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -1515,11 +1515,11 @@ class ArticlesApi:
             StrictStr, Field(description="Language code of the article")
         ],
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -1585,11 +1585,11 @@ class ArticlesApi:
             StrictStr, Field(description="Language code of the article")
         ],
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -1655,11 +1655,11 @@ class ArticlesApi:
             StrictStr, Field(description="Language code of the article")
         ],
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -1778,11 +1778,11 @@ class ArticlesApi:
         ],
         update_article_settings_request: UpdateArticleSettingsRequest | None = None,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -1852,11 +1852,11 @@ class ArticlesApi:
         ],
         update_article_settings_request: UpdateArticleSettingsRequest | None = None,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -1926,11 +1926,11 @@ class ArticlesApi:
         ],
         update_article_settings_request: UpdateArticleSettingsRequest | None = None,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -2073,11 +2073,11 @@ class ArticlesApi:
             Field(description="The description of the article"),
         ] = None,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -2152,11 +2152,11 @@ class ArticlesApi:
             Field(description="The description of the article"),
         ] = None,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -2231,11 +2231,11 @@ class ArticlesApi:
             Field(description="The description of the article"),
         ] = None,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -2365,11 +2365,11 @@ class ArticlesApi:
             StrictStr, Field(description="Language code of the article")
         ],
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -2441,11 +2441,11 @@ class ArticlesApi:
             StrictStr, Field(description="Language code of the article")
         ],
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -2517,11 +2517,11 @@ class ArticlesApi:
             StrictStr, Field(description="Language code of the article")
         ],
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -2643,11 +2643,11 @@ class ArticlesApi:
         article_id: Annotated[StrictStr, Field(description="The ID of the article")],
         lang_code: StrictStr,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -2711,11 +2711,11 @@ class ArticlesApi:
         article_id: Annotated[StrictStr, Field(description="The ID of the article")],
         lang_code: StrictStr,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -2779,11 +2779,11 @@ class ArticlesApi:
         article_id: Annotated[StrictStr, Field(description="The ID of the article")],
         lang_code: StrictStr,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -2916,11 +2916,11 @@ class ArticlesApi:
             ),
         ] = None,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -3010,11 +3010,11 @@ class ArticlesApi:
             ),
         ] = None,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -3104,11 +3104,11 @@ class ArticlesApi:
             ),
         ] = None,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -3244,11 +3244,11 @@ class ArticlesApi:
         article_id: Annotated[StrictStr, Field(description="The ID of the article")],
         publish_article_request: PublishArticleRequest | None = None,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -3317,11 +3317,11 @@ class ArticlesApi:
         article_id: Annotated[StrictStr, Field(description="The ID of the article")],
         publish_article_request: PublishArticleRequest | None = None,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -3390,11 +3390,11 @@ class ArticlesApi:
         article_id: Annotated[StrictStr, Field(description="The ID of the article")],
         publish_article_request: PublishArticleRequest | None = None,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -3529,11 +3529,11 @@ class ArticlesApi:
         self,
         article_id: Annotated[StrictStr, Field(description="The ID of the article")],
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -3598,11 +3598,11 @@ class ArticlesApi:
         self,
         article_id: Annotated[StrictStr, Field(description="The ID of the article")],
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -3667,11 +3667,11 @@ class ArticlesApi:
         self,
         article_id: Annotated[StrictStr, Field(description="The ID of the article")],
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -3786,11 +3786,11 @@ class ArticlesApi:
         article_id: Annotated[StrictStr, Field(description="The ID of the article")],
         update_article_settings_request: UpdateArticleSettingsRequest | None = None,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -3859,11 +3859,11 @@ class ArticlesApi:
         article_id: Annotated[StrictStr, Field(description="The ID of the article")],
         update_article_settings_request: UpdateArticleSettingsRequest | None = None,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -3932,11 +3932,11 @@ class ArticlesApi:
         article_id: Annotated[StrictStr, Field(description="The ID of the article")],
         update_article_settings_request: UpdateArticleSettingsRequest | None = None,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -4075,11 +4075,11 @@ class ArticlesApi:
             Field(description="The description of the article"),
         ] = None,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -4151,11 +4151,11 @@ class ArticlesApi:
             Field(description="The description of the article"),
         ] = None,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -4227,11 +4227,11 @@ class ArticlesApi:
             Field(description="The description of the article"),
         ] = None,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -4355,11 +4355,11 @@ class ArticlesApi:
             StrictInt, Field(description="Version number of the article")
         ],
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -4430,11 +4430,11 @@ class ArticlesApi:
             StrictInt, Field(description="Version number of the article")
         ],
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -4505,11 +4505,11 @@ class ArticlesApi:
             StrictInt, Field(description="Version number of the article")
         ],
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -4629,11 +4629,11 @@ class ArticlesApi:
         self,
         article_id: Annotated[StrictStr, Field(description="The ID of the article")],
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -4698,11 +4698,11 @@ class ArticlesApi:
         self,
         article_id: Annotated[StrictStr, Field(description="The ID of the article")],
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -4767,11 +4767,11 @@ class ArticlesApi:
         self,
         article_id: Annotated[StrictStr, Field(description="The ID of the article")],
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -4900,11 +4900,11 @@ class ArticlesApi:
             ),
         ] = None,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -4993,11 +4993,11 @@ class ArticlesApi:
             ),
         ] = None,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -5086,11 +5086,11 @@ class ArticlesApi:
             ),
         ] = None,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -5224,11 +5224,11 @@ class ArticlesApi:
         self,
         create_article_request: list[CreateArticleRequest] | None = None,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -5288,11 +5288,11 @@ class ArticlesApi:
         self,
         create_article_request: list[CreateArticleRequest] | None = None,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -5352,11 +5352,11 @@ class ArticlesApi:
         self,
         create_article_request: list[CreateArticleRequest] | None = None,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -5488,11 +5488,11 @@ class ArticlesApi:
             list[StrictInt], Field(description="Array of article version numbers")
         ],
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -5564,11 +5564,11 @@ class ArticlesApi:
             list[StrictInt], Field(description="Array of article version numbers")
         ],
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -5640,11 +5640,11 @@ class ArticlesApi:
             list[StrictInt], Field(description="Array of article version numbers")
         ],
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -5772,11 +5772,11 @@ class ArticlesApi:
             list[StrictStr], Field(description="Array of article IDs")
         ],
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -5838,11 +5838,11 @@ class ArticlesApi:
             list[StrictStr], Field(description="Array of article IDs")
         ],
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -5904,11 +5904,11 @@ class ArticlesApi:
             list[StrictStr], Field(description="Array of article IDs")
         ],
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -6023,11 +6023,11 @@ class ArticlesApi:
         ],
         bulk_publish_article: list[BulkPublishArticle] | None = None,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -6093,11 +6093,11 @@ class ArticlesApi:
         ],
         bulk_publish_article: list[BulkPublishArticle] | None = None,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -6163,11 +6163,11 @@ class ArticlesApi:
         ],
         bulk_publish_article: list[BulkPublishArticle] | None = None,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -6299,11 +6299,11 @@ class ArticlesApi:
         self,
         bulk_update_article: list[BulkUpdateArticle] | None = None,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -6363,11 +6363,11 @@ class ArticlesApi:
         self,
         bulk_update_article: list[BulkUpdateArticle] | None = None,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -6427,11 +6427,11 @@ class ArticlesApi:
         self,
         bulk_update_article: list[BulkUpdateArticle] | None = None,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -6557,11 +6557,11 @@ class ArticlesApi:
         self,
         create_article_request: CreateArticleRequest | None = None,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -6621,11 +6621,11 @@ class ArticlesApi:
         self,
         create_article_request: CreateArticleRequest | None = None,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,
@@ -6685,11 +6685,11 @@ class ArticlesApi:
         self,
         create_article_request: CreateArticleRequest | None = None,
         _request_timeout: (
-            None
-            | Annotated[StrictFloat, Field(gt=0)]
+            Annotated[StrictFloat, Field(gt=0)]
             | tuple[
                 Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
             ]
+            | None
         ) = None,
         _request_auth: dict[StrictStr, Any] | None = None,
         _content_type: StrictStr | None = None,

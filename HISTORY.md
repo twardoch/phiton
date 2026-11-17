@@ -24,7 +24,7 @@ Key symbol choices in `constants.py`:
 ```python
 PYTHON_TO_PHITON = {
     "return": "⇐",
-    "yield": "↥", 
+    "yield": "↥",
     "while": "⟳",
     "for": "∀",
     "if": "⋔",
@@ -78,7 +78,7 @@ The bot rewrote the dephitonizer with clear logic:
 def _reconstruct_blocks_and_lines(self, code: str) -> str:
     """Reconstruct Python block structure from Phiton."""
     # Convert block markers ⟨...⟩ to proper Python indentation
-    # Handle statement separators → 
+    # Handle statement separators →
     # Add colons to block-initiating statements
     # Deal with else/elif properly
 ```

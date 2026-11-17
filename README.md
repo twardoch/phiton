@@ -64,12 +64,14 @@ from phiton import phitonize, dephitonize, ConversionConfig
 
 # Compress
 out = phitonize(source_code)
-print(out["result"])   # Phiton string
-print(out["stats"])    # {"original_chars": ..., "compressed_chars": ..., "compression_ratio": ...}
+print(out["result"])  # Phiton string
+print(
+    out["stats"]
+)  # {"original_chars": ..., "compressed_chars": ..., "compression_ratio": ...}
 
 # Decompress
 out = dephitonize(phiton_code)
-print(out["result"])   # Python string
+print(out["result"])  # Python string
 
 # Custom settings
 config = ConversionConfig(level=3, comments=False, type_hints=False)
@@ -145,11 +147,11 @@ The tool earns its keep in one direction: squeeze Python down so more of it fits
 from phiton import ConversionConfig
 
 config = ConversionConfig(
-    level=5,          # 1–5, default 5
-    comments=True,    # preserve comments
+    level=5,  # 1–5, default 5
+    comments=True,  # preserve comments
     type_hints=True,  # preserve type annotations
-    minify=True,      # enable minification
-    symbols=True,     # enable symbol substitution
+    minify=True,  # enable minification
+    symbols=True,  # enable symbol substitution
 )
 ```
 
